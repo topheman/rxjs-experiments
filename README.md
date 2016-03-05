@@ -1,23 +1,15 @@
-Webpack Babel Starter
-=====================
+RxJS Experiments
+================
 
-[![Build Status](https://travis-ci.org/topheman/webpack-babel-starter.svg?branch=master)](https://travis-ci.org/topheman/webpack-babel-starter)
+[![Build Status](https://travis-ci.org/topheman/rxjs-experiments.svg?branch=master)](https://travis-ci.org/topheman/rxjs-experiments)
 
-A webpack starter kit with full development & build workflow, inspired by [topheman/react-es6-redux](https://github.com/topheman/react-es6-redux).
-
-What's in this boilerplate:
-
-* Development / Build / Lint tasks
-* [Babel](https://babeljs.io/) transpiler
-* [Eslint](http://eslint.org/) / [babel-eslint](https://github.com/babel/babel-eslint) / [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/eslint-config-airbnb-v5.0.1/packages/eslint-config-airbnb)
-* Sass support
-* Ship a version of your site with sourcemaps (see demo)
+Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter) (more there about the dev workflow).
 
 ###Install
 
 ```shell
-git clone https://github.com/topheman/webpack-babel-starter.git
-cd webpack-babel-starter
+git clone https://github.com/topheman/rxjs-experiments.git
+cd rxjs-experiments
 npm install
 ```
 
@@ -62,33 +54,12 @@ You can customize the behavior of the scripts by specifying environments vars:
 * `LOCALHOST=false` to access via IP from other devices on the same network (ex: `LOCALHOST=false npm start` - default `true`)
 * `DEVTOOLS`: By default at `null`. Used internally in `npm run build-prod-all` (you may not need that if you don't do OSS)
 
-###Assets
-
-The main image loaders are declared in the webpack config so that when you `require('./foo.png')` or use the helper `url('./bar.gif')` in your `.scss` files, at build time, those images will automatically be:
-
-* copied into `/build/dist/assets`
-* there name will be hashed (without you bothering with the reference in the generated code)
-* the hashed name will only change if the file changes (caching & git firendly)
-* I made sure that the css supports relative urls (this is why `main.css` lands at the same level as `index.html`)
-
 ###FAQ / Deploy
+
+See the [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter)'s FAQ:
 
 * deploy on github pages - [see wiki](https://github.com/topheman/webpack-babel-starter/wiki#deploy)
 * a problem ? Checkout the [FAQ](https://github.com/topheman/webpack-babel-starter/wiki#faq)
-
-###Bonus
-
-Check the source code of the html/js/css generated files, you'll see a banner containing informations such as:
-
-* date the build was made
-* version
-* git revision / link to this revision on github
-
-###Contributing
-
-PRs are welcome, just keep in mind this boilerplate aims to keep beeing framework agnostic.
-
-Everything related to contributing (tests, framework dependencies ...) is located in the [/contributing](https://github.com/topheman/webpack-babel-starter/tree/master/contributing) folder. Check the readme in their to see how to setup your workspace.
 
 Copyright 2016 © Christophe Rosset
 

@@ -34,33 +34,7 @@ if (process.env.DEVTOOLS && process.env.NODE_ENV !== 'production') {
 /** This is where the "real code" start */
 
 const main = () => {
-  console.log('Welcome! More infos at https://github.com/topheman/webpack-babel-starter');
-  // the following is nothing extraordinary ... just to show that the requiring of images work (as well from sass and require / direct and inlined)
-  if (global.document && global.document.querySelector) {
-
-    const testRequireEnsureLink = document.querySelector('.test-require-ensure');
-    const logo = document.querySelector('.logo');
-
-    /** display logos */
-    const cssClasses = ['babel', 'npm', 'eslint', 'sass'];
-    let current = 0;
-    document.getElementById('copyright-year').innerHTML = `© ${(new Date()).getFullYear()} `;
-    logo.addEventListener('mouseover', () => {
-      const body = document.getElementsByTagName('body')[0];
-      cssClasses.forEach(name => body.classList.remove(name));
-      current = (current + 1) % cssClasses.length;
-      body.classList.add(cssClasses[current]);
-    });
-
-    testRequireEnsureLink.addEventListener('click', () => {
-      // the following won't be included in the original build but will be lazy loaded only when needed
-      require.ensure([], (require) => {
-        const toggleCssClassName = require('./scripts/css-utils.js').toggleCssClassName;
-        toggleCssClassName(logo, 'rotate');
-        toggleCssClassName(testRequireEnsureLink, 'active');
-      });
-    });
-  }
+  console.log('Welcome! More infos at https://github.com/topheman/rxjs-experiments');
 };
 
 main();

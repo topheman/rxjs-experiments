@@ -1,7 +1,7 @@
 {
-  "name": "webpack-babel-starter",
+  "name": "rxjs-experiments",
   "version": "0.1.0",
-  "description": "Webpack Babel Starter Kit",
+  "description": "Playing with RxJS",
   "scripts": {
     "start": "npm run webpack",
     "test": "npm run lint",
@@ -16,29 +16,24 @@
     "webpack": "./node_modules/.bin/webpack-dev-server --progress --colors --hot --inline",
     "webpack-build": "./node_modules/.bin/webpack --progress",
     "webpack-build-prod": "./node_modules/.bin/webpack --progress -p",
-    "generate-dist-readme": "node bin/generate-dist-readme.js",
-    "contributing-install": "./contributing/bin/contributing-install.sh",
-    "contributing-test": "./contributing/bin/contributing-test.sh"
+    "generate-dist-readme": "node bin/generate-dist-readme.js"
   },
   "pre-commit": [
     "test"
   ],
   "keywords": [
-    "Webpack",
+    "RxJS",
+    "Functional Programming",
     "Babel",
-    "ES6",
-    "Sass",
-    "Eslint",
-    "Starter Kit",
-    "boilerplate"
+    "ES6"
   ],
   "author": "Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/topheman/webpack-babel-starter.git"
+    "url": "https://github.com/topheman/rxjs-experiments.git"
   },
   "bugs": {
-    "url": "https://github.com/topheman/webpack-babel-starter/issues"
+    "url": "https://github.com/topheman/rxjs-experiments/issues"
   },
   "license": "MIT",
   "devDependencies": {
