@@ -7,32 +7,36 @@
 <% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><link href="<%= webpack.assetsByChunkName['main'][1] %>" rel="stylesheet"><% } %></head>
 </head>
 <body>
-<div id="app-container">
-  <div id="header">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand logo" href="./">RxJS - experiments</a>
-        </div>
+<div id="header">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand logo" href="./">RxJS - experiments</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <ul class="site-networks">
-      <li class="twitter">
-        <a href="https://twitter.com/topheman" title="@topheman on twitter">
-          <span class="icon"></span>
-          <span class="desc">Twitter</span>
-        </a>
-      </li>
-      <li class="github">
-        <a href="https://github.com/topheman/rxjs-experiments" title="Fork on github">
-          <span class="icon"></span>
-          <span class="desc">Github</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+  <ul class="site-networks">
+    <li class="twitter">
+      <a href="https://twitter.com/topheman" title="@topheman on twitter">
+        <span class="icon"></span>
+        <span class="desc">Twitter</span>
+      </a>
+    </li>
+    <li class="github">
+      <a href="https://github.com/topheman/rxjs-experiments" title="Fork on github">
+        <span class="icon"></span>
+        <span class="desc">Github</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="home-container">
   <div class="container">
+    <p>
+      Some description ...
+    </p>
+    <p class="text-center"><button class="btn btn-primary btn-lg">Try the DEMO!!!</button></p>
     <% if (htmlWebpackPlugin.options.DEVTOOLS !== null) { %>
     <!-- This part will appear if you set DEVTOOLS=true or DEVTOOLS=false when launching an npm task -->
     <% if (!htmlWebpackPlugin.options.DEVTOOLS) { %>
@@ -53,6 +57,7 @@
     </p>
   </footer>
 </div>
+<div id="app-container"></div>
 <!-- keep the following lines -->
 <% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><script src="<%= Object.prototype.toString.call(webpack.assetsByChunkName['bundle']) === '[object Array]' ? webpack.assetsByChunkName['bundle'][0] : webpack.assetsByChunkName['bundle'] %>"><% } %></script>
 <!-- Google Analytics -->

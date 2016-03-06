@@ -55,6 +55,14 @@
 
 @import "header.scss";
 @import "footer.scss";
+@import "home.scss";
+
+/** since navbar-fixed-top */
+.site-networks {
+  position: fixed;
+  z-index: $zindex-navbar-fixed+1;
+}
+
 
 .summary a.active {
   font-weight: bold;
