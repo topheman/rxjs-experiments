@@ -65,5 +65,8 @@
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass": "^3.3.6"
+  }
 }

@@ -1,54 +1,61 @@
 @import "variables";
 
-@import "github-ribbon";
-@import "footer";
+// Instead of importing the whole bootstrap, only importing relevant parts
 
-html {
-  font-family: Arial,sans-serif;
-}
+// Core variables and mixins
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 
-h1,
-h2,
-h3,
-h5,
-h6 {
-  color: $brand-primary;
-}
+// Reset and dependencies
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/normalize";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/print";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
 
-a {
-  color: $brand-primary;
-}
+// Core CSS
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/type";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/code";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/grid";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/tables";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/forms";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/buttons";
 
-img.aligncenter {
-  display: block;
-  margin: 5px auto;
-}
+// Components
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/navs";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/navbar";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/pagination";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/pager";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/labels";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/badges";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/jumbotron";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/thumbnails";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/progress-bars";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/media";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/list-group";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/panels";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/wells";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/close";
 
-img.size-full {
-  height: auto;
-  max-width: 100%;
-}
+// Components w/ JavaScript
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/modals";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/popovers";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/carousel";
 
-@media screen and (min-width:$break-point) {
-  p.crop {
-    width: 90%;
-  }
-  img.logo {
-    transition: opacity 0.5s;
-  }
-  img.logo:hover {
-    opacity: 0.4;
-  }
-}
+// Utility classes
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
-.clearfix {
-  clear: both;
-}
+@import "header.scss";
+@import "footer.scss";
 
-code {
-  padding: 2px 4px;
-  font-size: 90%;
-  color: #c7254e;
-  background-color: #f9f2f4;
-  border-radius: 4px;
+.summary a.active {
+  font-weight: bold;
 }

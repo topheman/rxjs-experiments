@@ -6,28 +6,53 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
 <% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><link href="<%= webpack.assetsByChunkName['main'][1] %>" rel="stylesheet"><% } %></head>
 </head>
-<body class="babel">
-<!-- feel free to remove the following - except the script tags at the end -->
-<span id="forkongithub"><a href="https://github.com/topheman/rxjs-experiments" title="topheman/rxjs-experiments on github">Fork me on GitHub</a></span>
-<h1>RxJS experiments</h1>
-<% if (htmlWebpackPlugin.options.DEVTOOLS !== null) { %>
-<!-- This part will appear if you set DEVTOOLS=true or DEVTOOLS=false when launching an npm task -->
-  <% if (!htmlWebpackPlugin.options.DEVTOOLS) { %>
-  <p class="crop">
-    This is the production version. A version containing all sourcemaps, so that you could directly play with the ES6+ source code (by adding breakpoints ...).
-  </p>
-  <p><a href="./devtools/" title="Test the version with sourcemaps!">Just click here to see what's under the hood</a>.</p>
-  <% } else { %>
-  <p class="crop">This is the <strong>Developer version</strong>, containing sourcemaps. <strong>Open your devtools and read/set breakpoints on the original source code!</strong></p>
-  <p><a href="../" title="Back to the production version">Back to the production version</a></p>
-  <% } %>
-<% } %>
-<footer>
-  <p><span id="copyright-year"></span><a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset</p>
-  <p>
-    <iframe width="78px" height="28px" title="Twitter Tweet Button" style="border:0;overflow:hidden;" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?count=none&amp;dnt=false&amp;lang=en&amp;original_referer=http%3A%2F%2Ftopheman.github.io%2Frxjs-experiments%2F&amp;size=l&amp;text=%23RxJS%20experiments%20%23Webpack%20%23Babel&amp;type=share&amp;url=https%3A%2F%2Fgithub.com%2Ftopheman%2Frxjs-experiments%2F&amp;via=topheman" data-reactid=".0.2.0.6"></iframe>
-  </p>
-</footer>
+<body>
+<div id="app-container">
+  <div id="header">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand logo" href="./">RxJS - experiments</a>
+        </div>
+      </div>
+    </nav>
+
+    <ul class="site-networks">
+      <li class="twitter">
+        <a href="https://twitter.com/topheman" title="@topheman on twitter">
+          <span class="icon"></span>
+          <span class="desc">Twitter</span>
+        </a>
+      </li>
+      <li class="github">
+        <a href="https://github.com/topheman/rxjs-experiments" title="Fork on github">
+          <span class="icon"></span>
+          <span class="desc">Github</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <% if (htmlWebpackPlugin.options.DEVTOOLS !== null) { %>
+    <!-- This part will appear if you set DEVTOOLS=true or DEVTOOLS=false when launching an npm task -->
+    <% if (!htmlWebpackPlugin.options.DEVTOOLS) { %>
+    <p class="crop">
+      This is the <strong>production version</strong>. If you want to play with the ES6+ original source code:
+    </p>
+    <p class="text-center"><a href="./devtools/" title="Test the version with sourcemaps!" class="btn btn-primary">I'm a developer, I want to see what's under the hood!</a></p>
+    <% } else { %>
+    <p class="crop">This is the <strong>Developer version</strong>, containing sourcemaps. <strong>Open your devtools and read/set breakpoints on the original source code!</strong></p>
+    <p><a href="../" title="Back to the production version">Back to the production version</a></p>
+    <% } %>
+    <% } %>
+  </div>
+  <footer class="container">
+    <p><span id="copyright-year"></span><a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset</p>
+    <p>
+      <iframe width="78px" height="28px" title="Twitter Tweet Button" style="border:0;overflow:hidden;" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?count=none&amp;dnt=false&amp;lang=en&amp;original_referer=http%3A%2F%2Ftopheman.github.io%2Frxjs-experiments%2F&amp;size=l&amp;text=%23RxJS%20experiments%20%23Webpack%20%23Babel&amp;type=share&amp;url=https%3A%2F%2Fgithub.com%2Ftopheman%2Frxjs-experiments%2F&amp;via=topheman" data-reactid=".0.2.0.6"></iframe>
+    </p>
+  </footer>
+</div>
 <!-- keep the following lines -->
 <% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><script src="<%= Object.prototype.toString.call(webpack.assetsByChunkName['bundle']) === '[object Array]' ? webpack.assetsByChunkName['bundle'][0] : webpack.assetsByChunkName['bundle'] %>"><% } %></script>
 <!-- Google Analytics -->
