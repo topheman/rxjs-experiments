@@ -1,4 +1,7 @@
 /* eslint-disable max-len */
+import { createHashHistory } from 'history';
+import { init as initRouter } from './scripts/libs/micro-router';
+import routes from './routes';
 /** This is how you use the environments variables passed by the webpack.DefinePlugin **/
 
 /**
@@ -31,10 +34,11 @@ if (process.env.DEVTOOLS && process.env.NODE_ENV !== 'production') {
   console.info(`You're on DEVTOOLS mode, you may have access to tools enhancing developer experience - off to you to choose to disable them in production ...`);
 }
 
-/** This is where the "real code" start */
+/** This is where the "REAL CODE" starts */
 
 const main = () => {
   console.log('Welcome! More infos at https://github.com/topheman/rxjs-experiments');
 };
 
 main();
+initRouter(createHashHistory, routes);
