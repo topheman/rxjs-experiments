@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
-import { createHashHistory } from 'history';
-import { init as initRouter } from './scripts/libs/micro-router';
+import { router, hashHistory } from './scripts/libs/micro-router';
 import routes from './routes';
 /** This is how you use the environments variables passed by the webpack.DefinePlugin **/
 
@@ -41,4 +40,4 @@ const main = () => {
 };
 
 main();
-initRouter(createHashHistory, routes);
+router(hashHistory, routes);
