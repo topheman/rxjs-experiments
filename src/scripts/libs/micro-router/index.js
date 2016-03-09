@@ -47,12 +47,15 @@ const normalizeRoutes = (routes) => routes.map(route => {
   if (typeof route.pattern === 'undefined' || typeof route.handler === 'undefined') {
     throw new Error('Missing pattern or handler attribute');
   }
+  if (typeof route.resolve !== 'undefined' && typeof route.resolve.then === 'undefined') {
+    throw new Error('resolve param only accepts promises');
+  }
   return {
     matcher: getMatcherFromPattern(route.pattern),
-    handler: route.handler
+    handler: route.handler,
+    resolve: route.resolve
   };
 });
-
 
 /*
  * @param {Function} createHistory
@@ -67,19 +70,33 @@ export const router = (createHistory, options) => {
   let currentLocationPathname = null;
   let unmountHandler = function noop() {};
   const unlisten = history.listen(location => {
-    // match the location.pathname to one of the routes and extract the mount handler
-    const mountHandler = routes
+    // match the location.pathname to one of the routes and extract the related mounting infos (handler, resolve ...)
+    const mount = routes
       .filter(route => route.matcher(location.pathname))
-      .map(route => route.handler)
-      .reduce((result, handler) => result || handler, null);// 1) always reducing to the first match if multiple ones 2) if no match, reduce to null
+      .reduce((result, matchedMount) => result || matchedMount, null);// 1) always reducing to the first match if multiple ones 2) if no match, reduce to null
     // only redraw if a handler was matched & the location has changed
-    if (mountHandler && currentLocationPathname !== location.pathname) {
-      unmountHandler(location, history);// unmount previous component with its unmount method
-      currentLocationPathname = location.pathname;
-      unmountHandler = mountHandler(location, history);// mount new component and store the unmount method
-      if (process.env.NODE_ENV !== 'production') {
-        if (typeof unmountHandler === 'undefined') {
-          console.warn(`Handler matching ${location.pathname} should return an unmount function.`);
+    if (mount && currentLocationPathname !== location.pathname) {
+      // mount new component and store the unmount method
+      if (mount.resolve) { // support for deferred mounting
+        mount.resolve.then(() => {
+          unmountHandler(location, history);// unmount previous component with its unmount method
+          currentLocationPathname = location.pathname;
+          unmountHandler = mount.handler(location, history);
+          if (process.env.NODE_ENV !== 'production') {
+            if (typeof unmountHandler === 'undefined') {
+              console.warn(`Handler matching ${location.pathname} should return an unmount function.`);
+            }
+          }
+        });
+      }
+      else {
+        unmountHandler(location, history);// unmount previous component with its unmount method
+        currentLocationPathname = location.pathname;
+        unmountHandler = mount.handler(location, history);
+        if (process.env.NODE_ENV !== 'production') {
+          if (typeof unmountHandler === 'undefined') {
+            console.warn(`Handler matching ${location.pathname} should return an unmount function.`);
+          }
         }
       }
     }
