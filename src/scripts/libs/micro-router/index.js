@@ -19,6 +19,7 @@
 
 import { createHashHistory } from 'history';
 export const hashHistory = createHashHistory;
+import invariant from 'invariant';
 
 import { normalizeRoutes } from './utils';
 
@@ -47,22 +48,14 @@ export const router = (createHistory, options) => {
           unmountHandler(location, history);// unmount previous component with its unmount method
           currentLocationPathname = location.pathname;
           unmountHandler = mount.handler(location, history);
-          if (process.env.NODE_ENV !== 'production') {
-            if (typeof unmountHandler === 'undefined') {
-              console.warn(`Handler matching ${location.pathname} should return an unmount function.`);
-            }
-          }
+          invariant(!(typeof unmountHandler === 'undefined'), `Handler matching ${location.pathname} should return an unmount function.`);
         });
       }
       else {
         unmountHandler(location, history);// unmount previous component with its unmount method
         currentLocationPathname = location.pathname;
         unmountHandler = mount.handler(location, history);
-        if (process.env.NODE_ENV !== 'production') {
-          if (typeof unmountHandler === 'undefined') {
-            console.warn(`Handler matching ${location.pathname} should return an unmount function.`);
-          }
-        }
+        invariant(!(typeof unmountHandler === 'undefined'), `Handler matching ${location.pathname} should return an unmount function.`);
       }
     }
   });

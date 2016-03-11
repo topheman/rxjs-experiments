@@ -40,6 +40,7 @@
     "babel-core": "^6.5.2",
     "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.3",
+    "babel-plugin-dev-expression": "^0.2.1",
     "babel-preset-es2015": "^6.5.0",
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
@@ -69,6 +70,7 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
-    "history": "^2.0.1"
+    "history": "^2.0.1",
+    "invariant": "^2.2.1"
   }
 }
