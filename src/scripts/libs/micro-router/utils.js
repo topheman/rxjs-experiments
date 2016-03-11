@@ -7,24 +7,64 @@
  */
 
 /**
- * Returns a matcher according to the type of the pattern
+ * Patterns accepted:
+ * - "*": match all
+ * - RegExp
+ * - /post/:param1/edit/:param2 -> will match this pattern and return the matched params in a params object
+ * - a string
+ *
+ * This method will attempt to return a matcher, according to the pattern returned
+ * This matcher has the signature function(pathname) {...} will return false or the matched params
+ * It takes a pattern in param and return a function that takes a pathname in param and will return:
+ *  - false if no match
+ *  - an object with potential matched params
  * @param {String|RegExp} pattern
- * @returns {Function}
+ * @returns {Function} (pathname) => false|{paramsMatched}
  */
-export const getMatcherFromPattern = (pattern) => {
-  if (typeof pattern === 'string') {
-    if (pattern === '*') {
-      return () => true;// match all
-    }
-    return pathname => pattern === pathname;
-  }
-  else if (pattern instanceof RegExp) {
-    return pathname => {
-      console.log(pathname, pattern, pathname.match(pattern));
-      return pathname.match(pattern) !== null;
+export const compilePattern = (pattern) => {
+  // 1) if pattern is a regexp, return a matcher using this regexp
+  if (pattern instanceof RegExp) {
+    return (pathname) => {
+      if (pathname.match(pattern) !== null) {
+        return {};
+      }
+      return false;
     };
   }
-  throw new Error('Unhandled pattern type');
+
+  // 2) if pattern is a "match all", return a matcher that always matches
+  if (pattern === '*') {
+    // this matcher matches any pathname
+    return () => ({});
+  }
+
+  // 3) try to create a matcher for a pattern with params in it
+
+  const paramNamesMatcher = /:([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+  let paramNames = pattern.match(paramNamesMatcher);
+  // console.log('paramNames', paramNames);
+
+  if (paramNames !== null) {
+    paramNames = paramNames.map(match => match.slice(1));// remove the ":" to get the exact paramNames
+    const paramNamesRegexpSource = pattern.replace(/:([^\/]+)/g, '([^/?#]+)');// replace ":paramName" by the regexp that will match this param
+    return (pathname) => {
+      const matches = pathname.match(new RegExp(`^${paramNamesRegexpSource}$`));
+      let matchedParams;
+      if (matches !== null) {
+        matchedParams = matches.reduce((result, match, index) => {
+          if (index > 0) {
+            result[paramNames[index - 1]] = match;// eslint-disable-line no-param-reassign
+          }
+          return result;
+        }, {});
+        return matchedParams;
+      }
+      return false;
+    };
+  }
+
+  // 4) if nothing of the above applied, simply return a matcher that matched a string
+  return (pathname) => pathname === pattern ? {} : false;
 };
 
 /**
@@ -41,7 +81,7 @@ export const normalizeRoutes = (routes) => routes.map(route => {
     throw new Error('resolve param only accepts promises');
   }
   return {
-    matcher: getMatcherFromPattern(route.pattern),
+    matcher: compilePattern(route.pattern),
     handler: route.handler,
     resolve: route.resolve
   };

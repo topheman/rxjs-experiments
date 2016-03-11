@@ -12,7 +12,7 @@
  * ```js
  * import { router, hashHistory } from './scripts/libs/micro-router';
  * router(hashHistory, [
- *   { pattern: '/', handler: (location, history) => { console.log('mounting'); return (loc, his) => console.log('unmounting'); } }
+ *   { pattern: '/', handler: ({location, params}, history) => { console.log('mounting'); return ({loc, par}, his) => console.log('unmounting'); } }
  * ]);
  * ```
  */
@@ -38,23 +38,33 @@ export const router = (createHistory, options) => {
   const unlisten = history.listen(location => {
     // match the location.pathname to one of the routes and extract the related mounting infos (handler, resolve ...)
     const mount = routes
-      .filter(route => route.matcher(location.pathname))
+      .reduce((result, route) => {
+        const params = route.matcher(location.pathname);// a matcher returns false if no match or an object with potentials params matched for the route
+        if (params && result.length === 0) {// once we get a match, no more matching
+          result.push({
+            handler: route.handler,
+            resolve: route.resolve,
+            params
+          });
+        }
+        return result;
+      }, [])
       .reduce((result, matchedMount) => result || matchedMount, null);// 1) always reducing to the first match if multiple ones 2) if no match, reduce to null
     // only redraw if a handler was matched & the location has changed
     if (mount && currentLocationPathname !== location.pathname) {
       // mount new component and store the unmount method
       if (mount.resolve) { // support for deferred mounting
         mount.resolve.then(() => {
-          unmountHandler(location, history);// unmount previous component with its unmount method
+          unmountHandler({ location, params: mount.params }, history);// unmount previous component with its unmount method
           currentLocationPathname = location.pathname;
-          unmountHandler = mount.handler(location, history);
+          unmountHandler = mount.handler({ location, params: mount.params }, history);
           invariant(!(typeof unmountHandler === 'undefined'), `Handler matching ${location.pathname} should return an unmount function.`);
         });
       }
       else {
-        unmountHandler(location, history);// unmount previous component with its unmount method
+        unmountHandler({ location, params: mount.params }, history);// unmount previous component with its unmount method
         currentLocationPathname = location.pathname;
-        unmountHandler = mount.handler(location, history);
+        unmountHandler = mount.handler({ location, params: mount.params }, history);
         invariant(!(typeof unmountHandler === 'undefined'), `Handler matching ${location.pathname} should return an unmount function.`);
       }
     }

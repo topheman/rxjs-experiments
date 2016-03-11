@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-expressions */
 const expect = require('chai').expect;
 
-import { getMatcherFromPattern } from '../utils';
+import { compilePattern } from '../utils';
 
 describe('micro-router', () => {
   describe('pattern matching', () => {
     describe('*', () => {
-      const matcher = getMatcherFromPattern('*');
+      const matcher = compilePattern('*');
       it('should match /toto', () => {
-        expect(matcher('/toto')).to.be.true;
+        expect(matcher('/toto')).to.be.truthy;
       });
       it('should match anything', () => {
-        expect(matcher('anything')).to.be.true;
+        expect(matcher('anything')).to.be.truthy;
       });
     });
   });
