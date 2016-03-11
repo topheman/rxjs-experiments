@@ -9,5 +9,8 @@
     "indent": [2, 2, {"SwitchCase": 1}],
     "spaced-comment": 1
   },
-  "extends": "airbnb/base"
+  "extends": "airbnb/base",
+  "env": {
+    "mocha": true
+  }
 }
