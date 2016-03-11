@@ -21,7 +21,7 @@ import { createHashHistory } from 'history';
 export const hashHistory = createHashHistory;
 import invariant from 'invariant';
 
-import { normalizeRoutes } from './utils';
+import { normalizeRoutes, compileMatchMount } from './utils';
 
 /*
  * @param {Function} createHistory
@@ -33,23 +33,12 @@ import { normalizeRoutes } from './utils';
 export const router = (createHistory, options) => {
   const history = createHistory();
   const routes = normalizeRoutes(options);
+  const matchMount = compileMatchMount(routes);
   let currentLocationPathname = null;
   let unmountHandler = function noop() {};
   const unlisten = history.listen(location => {
     // match the location.pathname to one of the routes and extract the related mounting infos (handler, resolve ...)
-    const mount = routes
-      .reduce((result, route) => {
-        const params = route.matcher(location.pathname);// a matcher returns false if no match or an object with potentials params matched for the route
-        if (params && result.length === 0) {// once we get a match, no more matching
-          result.push({
-            handler: route.handler,
-            resolve: route.resolve,
-            params
-          });
-        }
-        return result;
-      }, [])
-      .reduce((result, matchedMount) => result || matchedMount, null);// 1) always reducing to the first match if multiple ones 2) if no match, reduce to null
+    const mount = matchMount(location.pathname);
     // only redraw if a handler was matched & the location has changed
     if (mount && currentLocationPathname !== location.pathname) {
       // mount new component and store the unmount method
