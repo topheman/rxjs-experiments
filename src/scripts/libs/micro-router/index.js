@@ -27,12 +27,15 @@ export const hashHistory = createHashHistory;
 const getMatcherFromPattern = (pattern) => {
   if (typeof pattern === 'string') {
     if (pattern === '*') {
-      return pathname => /(.*)/.test(pathname);
+      return () => true;// match all
     }
     return pathname => pattern === pathname;
   }
   else if (pattern instanceof RegExp) {
-    return pathname => pattern.test(pathname);
+    return pathname => {
+      console.log(pathname, pattern, pathname.match(pattern));
+      return pathname.match(pattern) !== null;
+    };
   }
   throw new Error('Unhandled pattern type');
 };

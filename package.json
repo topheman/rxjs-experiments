@@ -50,6 +50,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "git-rev-sync": "^1.4.0",
+    "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.9.0",
     "json-loader": "^0.5.4",
     "lodash.template": "^4.2.2",

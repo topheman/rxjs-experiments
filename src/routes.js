@@ -1,7 +1,11 @@
-import home from './scripts/containers/home/home';
+import homeHandler from './scripts/containers/home/home';
+import routerHandler from './scripts/containers/router/router';
 
-const generateHandler = (name) => (location, history) => {
+const generateHandler = (name, handler) => (location, history) => {
   console.log(`Mounting ${name}`, location, history);
+  if (typeof handler === 'function') {
+    return handler(location, history);
+  }
   return (l, h) => {
     console.log(`Unmounting ${name}`, l, h);
   };
@@ -15,13 +19,15 @@ const generatePromiseTimeout = (name, timeout = 5000) => new Promise(res => {// 
 });
 
 const routes = [
-  { pattern: '/', handler: home },
+  { pattern: '/', handler: homeHandler },
+  { pattern: '/router', handler: routerHandler },
+  { pattern: /^\/router\/user\/([^\/?#]+)\/([^\/?#]+)$/i, handler: routerHandler },
   { pattern: '/test', handler: generateHandler('/test') },
   { pattern: '/foo', handler: generateHandler('/foo') },
   { pattern: '/bar', handler: generateHandler('/bar') },
   { pattern: '/resolve', handler: generateHandler('/resolve'), resolve: generatePromiseTimeout('/resolve') },
   { pattern: /\/bar\/\w+\/list/, handler: generateHandler('/bar/:string/list') },
-  { pattern: '*', handler: generateHandler('CAPTURE ALL') }
+  { pattern: '*', handler: generateHandler('CAPTURE ALL', homeHandler) }
 ];
 
 export default routes;

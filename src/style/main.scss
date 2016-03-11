@@ -55,7 +55,11 @@
 
 @import "header.scss";
 @import "footer.scss";
-@import "home.scss";
+
+#home-container,
+#app-container {
+  margin-top: $navbar-height + $navbar-margin-bottom;
+}
 
 /** since navbar-fixed-top */
 .site-networks {

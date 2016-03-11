@@ -180,6 +180,10 @@ const config = {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
       },
+      {
+        test: /\.html$/,
+        loader: "html"
+      },
       { test: /\.(png)$/, loader: 'url-loader?limit=' + ASSETS_LIMIT + '&name=assets/[hash].[ext]' },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=' + ASSETS_LIMIT + '&mimetype=application/font-woff&name=assets/[hash].[ext]' },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=' + ASSETS_LIMIT + '&mimetype=application/font-woff&name=assets/[hash].[ext]' },
