@@ -5,6 +5,17 @@ RxJS Experiments
 
 Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter) (more there about the dev workflow).
 
+This project is at its early stage of development. The motivation is to try out [RxJS](https://github.com/Reactive-Extensions/RxJS), without relying on any framework (CycleJS, ReactJS or AngularJS 2), not to experience the library in a specific context.
+
+You'll see that I developed for this project:
+
+* A [micro-router](https://github.com/topheman/rxjs-experiments/tree/master/src/scripts/libs/micro-router) (based on [history](https://github.com/mjackson/history))
+* A VanillaJS implementation of the [bootstrap modal](https://github.com/topheman/rxjs-experiments/tree/master/src/scripts/components/modal)
+
+The project is now ready to setup RxJS (there are routes, I've setup [sensors-checker](https://github.com/topheman/sensorsChecker.js), a module I made that will let me check for accelerometers - hooking those sensors with RxJS is one of the features I'll implement).
+
+##Dev Workflow
+
 ###Install
 
 ```shell
