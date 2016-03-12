@@ -1,15 +1,15 @@
 /**
  * This is the "controller" launched by the micro-router
  * It returns the methods to cleanup after unmounting
- * @param history
+ * @param { location, params }
  * @param location
  * @returns {unMount}
  */
-const mount = (location, history) => {
-  console.log('mount home', location, history);
+const mount = ({ location, params }, history) => {
+  console.log('mount home', location, params, history);
   document.getElementById('home-container').style.display = 'block';
-  const unMount = (l, h) => {
-    console.log('unMount home', l, h);
+  const unMount = ({ location: l, params: p }, h) => {
+    console.log('unMount home', l, p, h);
     document.getElementById('home-container').style.display = 'none';
   };
   return unMount;

@@ -1,7 +1,7 @@
 /**
  * This is the "controller" launched by the micro-router for the route /router (and some others)
  * It returns the methods to cleanup after unmounting
- * @param history
+ * @param { location, params }
  * @param location
  * @returns {unMount}
  */

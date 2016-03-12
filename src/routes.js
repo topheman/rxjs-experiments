@@ -1,5 +1,8 @@
+import { resolveDeviceMotion } from './scripts/services/accelerometer';
+
 import homeHandler from './scripts/containers/home/home';
 import routerHandler from './scripts/containers/router/router';
+import reactiveScreenHandler from './scripts/containers/reactiveScreen/reactiveScreen';
 
 const generateHandler = (name, handler) => ({ location, params }, history) => {
   console.log(`Mounting ${name}`, location, params, history);
@@ -24,6 +27,7 @@ const routes = [
   { pattern: /^\/router\/user\/([^\/?#]+)\/([^\/?#]+)$/i, handler: routerHandler },
   { pattern: '/router/posts/:category/:title/edit', handler: routerHandler },
   { pattern: '/router/resolve', handler: generateHandler('/router/resolve'), resolve: generatePromiseTimeout('/router/resolve') },
+  { pattern: '/reactive-screen', handler: reactiveScreenHandler, resolve: resolveDeviceMotion() },
   { pattern: '*', handler: generateHandler('CAPTURE ALL', homeHandler) }
 ];
 

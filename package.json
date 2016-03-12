@@ -75,6 +75,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
     "history": "^2.0.1",
-    "invariant": "^2.2.1"
+    "invariant": "^2.2.1",
+    "sensors-checker": "^1.0.0"
   }
 }

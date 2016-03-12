@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import modal from './scripts/components/modal/modal';
 import { router, hashHistory } from './scripts/libs/micro-router';
 import routes from './routes';
 /** This is how you use the environments variables passed by the webpack.DefinePlugin **/
@@ -37,6 +38,7 @@ if (process.env.DEVTOOLS && process.env.NODE_ENV !== 'production') {
 
 const main = () => {
   console.log('Welcome! More infos at https://github.com/topheman/rxjs-experiments');
+  modal();
 };
 
 main();
