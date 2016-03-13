@@ -3,8 +3,8 @@
  * 
  * Playing with RxJS
  * 
- * @version v0.2.0 - 12/03/2016
- * @revision #3dcfb8f - https://github.com/topheman/rxjs-experiments/tree/3dcfb8f9ab67c3794c40d06e9f5b355af967da35
+ * @version v0.2.0 - 13/03/2016
+ * @revision #fe32d5f - https://github.com/topheman/rxjs-experiments/tree/fe32d5f05912ae29fcd2233b772b038be019d6f0
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @copyright 2016(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT
@@ -3906,7 +3906,11 @@
 	
 	var _router2 = _interopRequireDefault(_router);
 	
-	var _reactiveScreen = __webpack_require__(45);
+	var _accelerometer2 = __webpack_require__(45);
+	
+	var _accelerometer3 = _interopRequireDefault(_accelerometer2);
+	
+	var _reactiveScreen = __webpack_require__(47);
 	
 	var _reactiveScreen2 = _interopRequireDefault(_reactiveScreen);
 	
@@ -3941,7 +3945,7 @@
 	  });
 	};
 	
-	var routes = [{ pattern: '/', handler: _home2.default }, { pattern: '/router', handler: _router2.default }, { pattern: /^\/router\/user\/([^\/?#]+)\/([^\/?#]+)$/i, handler: _router2.default }, { pattern: '/router/posts/:category/:title/edit', handler: _router2.default }, { pattern: '/router/resolve', handler: generateHandler('/router/resolve'), resolve: generatePromiseTimeout('/router/resolve') }, { pattern: '/reactive-screen', handler: _reactiveScreen2.default, resolve: (0, _accelerometer.resolveDeviceMotion)() }, { pattern: '*', handler: generateHandler('CAPTURE ALL', _home2.default) }];
+	var routes = [{ pattern: '/', handler: _home2.default }, { pattern: '/router', handler: _router2.default }, { pattern: /^\/router\/user\/([^\/?#]+)\/([^\/?#]+)$/i, handler: _router2.default }, { pattern: '/router/posts/:category/:title/edit', handler: _router2.default }, { pattern: '/router/resolve', handler: generateHandler('/router/resolve'), resolve: generatePromiseTimeout('/router/resolve') }, { pattern: '/accelerometer', handler: _accelerometer3.default, resolve: (0, _accelerometer.resolveDeviceMotion)() }, { pattern: '/accelerometer/reactive-screen', handler: _reactiveScreen2.default, resolve: (0, _accelerometer.resolveDeviceMotion)() }, { pattern: '*', handler: generateHandler('CAPTURE ALL', _home2.default) }];
 	
 	exports.default = routes;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -4207,13 +4211,56 @@
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _accelerometer = __webpack_require__(40);
+	
+	var mount = function mount() {
+	  var html = __webpack_require__(46);
+	  var container = document.getElementById('app-container');
+	  container.innerHTML = html;
+	  var deviceMotionActive = (0, _accelerometer.isDeviceMotionActive)();
+	  if (deviceMotionActive) {
+	    document.getElementById('accelerometer-detected').style.display = 'block';
+	  } else {
+	    document.getElementById('accelerometer-not-detected').style.display = 'block';
+	  }
+	  var unMount = function unMount() {
+	    document.getElementById('app-container').innerHTML = '';
+	  };
+	  return unMount;
+	}; /**
+	    * This is the "controller" launched by the micro-router for the route /accelerometer
+	    * It returns the methods to cleanup after unmounting
+	    * @param { location, params }
+	    * @param location
+	    * @returns {unMount}
+	    */
+	
+	
+	exports.default = mount;
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	module.exports = "<div  class=\"container\">\n  <h2>Accelerometer</h2>\n  <p id=\"accelerometer-detected\" style=\"display: none;\">An accelerometer has been detected on your device, the demo will be based on it.</p>\n  <p id=\"accelerometer-not-detected\" style=\"display: none;\"><strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.</p>\n  <p class=\"text-center\"><a class=\"btn btn-primary btn-lg\" href=\"#/accelerometer/reactive-screen\">Try the DEMO!!!</a></p>\n</div>\n";
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(console) {'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _utils = __webpack_require__(46);
+	var _utils = __webpack_require__(48);
 	
 	var _accelerometer = __webpack_require__(40);
 	
@@ -4229,7 +4276,7 @@
 	  var deviceMotionActive = (0, _accelerometer.isDeviceMotionActive)();
 	  var hideModal = (0, _modal.show)({
 	    title: 'Infos',
-	    content: '<p>This content will be customized ...</p><p>Accelerometer found: <strong>' + (deviceMotionActive ? 'yes' : 'no') + '</strong></p>'
+	    content: '<p>' + (deviceMotionActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.') + '</p>'
 	  });
 	  var enableMouseScroll = (0, _utils.disableMouseScroll)();
 	  var unMount = function unMount(_ref2, h) {
@@ -4256,7 +4303,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 46 */
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4309,4 +4356,4 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=bundle-devtools-39e674429a91f7bb7977.js.map
+//# sourceMappingURL=bundle-devtools-25114d52ac81a323de93.js.map
