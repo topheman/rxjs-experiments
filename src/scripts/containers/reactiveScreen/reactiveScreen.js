@@ -17,7 +17,7 @@ const mount = ({ location, params }, history) => {
   const deviceMotionActive = isDeviceMotionActive();
   const hideModal = showModal({
     title: 'Infos',
-    content: `<p>This content will be customized ...</p><p>Accelerometer found: <strong>${deviceMotionActive ? 'yes' : 'no'}</strong></p>`
+    content: `<p>${deviceMotionActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}</p>`
   });
   const enableMouseScroll = disableMouseScroll();
   const unMount = ({ location: l, params: p }, h) => {
