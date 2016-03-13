@@ -7,17 +7,17 @@
  */
 
 import { disableMouseScroll } from '../../services/utils';
-import { isDeviceMotionActive } from '../../services/accelerometer';
+import { isDeviceOrientationActive } from '../../services/accelerometer';
 import { show as showModal } from '../../components/modal/modal';
 
 const mount = ({ location, params }, history) => {
   console.log('mount reactive-screen', location, params, history);
   document.getElementById('app-container').innerHTML = '';
   document.getElementById('app-container').classList.add('full-screen');
-  const deviceMotionActive = isDeviceMotionActive();
+  const deviceOrientationActive = isDeviceOrientationActive();
   const hideModal = showModal({
     title: 'Infos',
-    content: `<p>${deviceMotionActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}</p>`
+    content: `<p>${deviceOrientationActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}</p>`
   });
   const enableMouseScroll = disableMouseScroll();
   const unMount = ({ location: l, params: p }, h) => {

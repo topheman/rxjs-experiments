@@ -1,4 +1,4 @@
-import { resolveDeviceMotion } from './scripts/services/accelerometer';
+import { resolveDeviceOrientation } from './scripts/services/accelerometer';
 
 import homeHandler from './scripts/containers/home/home';
 import routerHandler from './scripts/containers/router/router';
@@ -28,8 +28,8 @@ const routes = [
   { pattern: /^\/router\/user\/([^\/?#]+)\/([^\/?#]+)$/i, handler: routerHandler },
   { pattern: '/router/posts/:category/:title/edit', handler: routerHandler },
   { pattern: '/router/resolve', handler: generateHandler('/router/resolve'), resolve: generatePromiseTimeout('/router/resolve') },
-  { pattern: '/accelerometer', handler: accelerometerHandler, resolve: resolveDeviceMotion() },
-  { pattern: '/accelerometer/reactive-screen', handler: reactiveScreenHandler, resolve: resolveDeviceMotion() },
+  { pattern: '/accelerometer', handler: accelerometerHandler, resolve: resolveDeviceOrientation() },
+  { pattern: '/accelerometer/reactive-screen', handler: reactiveScreenHandler, resolve: resolveDeviceOrientation() },
   { pattern: '*', handler: generateHandler('CAPTURE ALL', homeHandler) }
 ];
 

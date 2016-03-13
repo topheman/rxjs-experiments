@@ -36,6 +36,8 @@ const LOCALHOST = process.env.LOCALHOST ? JSON.parse(process.env.LOCALHOST) : tr
 const ASSETS_LIMIT = typeof process.env.ASSETS_LIMIT !== 'undefined' ? parseInt(process.env.ASSETS_LIMIT, 10) : 5000;// limit bellow the assets will be inlines
 const hash = (NODE_ENV === 'production' && DEVTOOLS ? '-devtools' : '') + (NODE_ENV === 'production' ? '-[hash]' : '');
 
+const SENSORS_CHECKER = process.env.SENSORS_CHECKER ? JSON.parse(process.env.SENSORS_CHECKER) : true;// if false, will disable the lookup for an accelerometer (that way you can use it when debugging on desktop)
+
 /** integrity checks */
 
 if (/^\w+/.test(DIST_DIR) === false || /\/$/.test(DIST_DIR) === true) { // @todo make a better regexp that accept valid unicode leading chars
@@ -56,6 +58,7 @@ if (FAIL_ON_ERROR) {
 if (OPTIMIZE) {
   log.info('webpack', 'OPTIMIZE: code will be compressed and deduped');
 }
+log.info('webpack', 'SENSORS_CHECKER ' + (SENSORS_CHECKER ? 'enabled' : 'disabled'));
 
 /** plugins setup */
 
@@ -84,7 +87,8 @@ plugins.push(new webpack.DefinePlugin({
   'process.env':{
     'NODE_ENV': JSON.stringify(NODE_ENV),
     'DEVTOOLS': DEVTOOLS, // You can rely on this var in your code to enable specific features only related to development (that are not related to NODE_ENV)
-    'LINTER': LINTER // You can choose to log a warning in dev if the linter is disabled
+    'LINTER': LINTER, // You can choose to log a warning in dev if the linter is disabled
+    'SENSORS_CHECKER': SENSORS_CHECKER
   }
 }));
 

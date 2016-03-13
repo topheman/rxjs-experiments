@@ -5,14 +5,14 @@
  * @param location
  * @returns {unMount}
  */
-import { isDeviceMotionActive } from '../../services/accelerometer';
+import { isDeviceOrientationActive } from '../../services/accelerometer';
 
 const mount = () => {
   const html = require('./template.html');
   const container = document.getElementById('app-container');
   container.innerHTML = html;
-  const deviceMotionActive = isDeviceMotionActive();
-  if (deviceMotionActive) {
+  const deviceOrientationActive = isDeviceOrientationActive();
+  if (deviceOrientationActive) {
     document.getElementById('accelerometer-detected').style.display = 'block';
   }
   else {
