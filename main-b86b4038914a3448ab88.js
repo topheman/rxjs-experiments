@@ -3,8 +3,8 @@
  * 
  * Playing with RxJS
  * 
- * @version v0.2.0 - 13/03/2016
- * @revision #fe32d5f - https://github.com/topheman/rxjs-experiments/tree/fe32d5f05912ae29fcd2233b772b038be019d6f0
+ * @version v0.2.0 - 15/03/2016
+ * @revision #578fec3 - https://github.com/topheman/rxjs-experiments/tree/578fec32b2693659e2eb77df713bb149b4483234
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @copyright 2016(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT

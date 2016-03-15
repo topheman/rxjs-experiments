@@ -3,8 +3,8 @@
  * 
  * Playing with RxJS
  * 
- * @version v0.2.0 - 13/03/2016
- * @revision #fe32d5f - https://github.com/topheman/rxjs-experiments/tree/fe32d5f05912ae29fcd2233b772b038be019d6f0
+ * @version v0.2.0 - 15/03/2016
+ * @revision #578fec3 - https://github.com/topheman/rxjs-experiments/tree/578fec32b2693659e2eb77df713bb149b4483234
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @copyright 2016(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT
@@ -5310,6 +5310,9 @@ ul.site-networks li.github a span.icon {
 }
 
 @media only screen and (max-width: 768px) and (min-width: 370px) {
+  ul.site-networks {
+    right: 70px;
+  }
   ul.site-networks li {
     margin-left: 0px;
   }
@@ -5325,6 +5328,12 @@ ul.site-networks li.github a span.icon {
 }
 
 /** for small devices */
+@media only screen and (max-width: 370px) {
+  ul.site-networks {
+    display: none;
+  }
+}
+
 .navbar-default button.navbar-toggle {
   border-color: #900000;
 }
@@ -5360,8 +5369,18 @@ footer {
   z-index: 1031;
 }
 
+#qr-code {
+  float: right;
+}
+
+@media only screen and (max-width: 768px) {
+  #qr-code {
+    display: none;
+  }
+}
+
 .summary a.active {
   font-weight: bold;
 }
 
-/*# sourceMappingURL=main-devtools-25114d52ac81a323de93.css.map*/
+/*# sourceMappingURL=main-devtools-4faf788f50e477ffd285.css.map*/
