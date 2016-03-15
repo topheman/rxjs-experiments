@@ -34,9 +34,9 @@
 <div id="home-container" style="display: none;">
   <div class="container">
     <p style="margin-top: 20px;">
-      Some description ...
+      Some description ...<img id="qr-code" src="<%= require('./assets/images/qr-code.png') %>"/>
     </p>
-    <p class="text-center"><a class="btn btn-primary btn-lg" href="#/accelerometer">Try the DEMO!!!</a></p>
+    <p class="text-center"><a class="btn btn-primary btn-lg" href="#/accelerometer">Check out the DEMO!!!</a></p>
     <p>Checkout the homemade <a href="#/router">router</a>, based on <code>history</code>.</p>
     <% if (htmlWebpackPlugin.options.DEVTOOLS !== null) { %>
     <!-- This part will appear if you set DEVTOOLS=true or DEVTOOLS=false when launching an npm task -->
@@ -44,7 +44,7 @@
     <p class="crop">
       This is the <strong>production version</strong>. If you want to play with the ES6+ original source code:
     </p>
-    <p class="text-center"><a href="./devtools/" title="Test the version with sourcemaps!" class="btn btn-primary">I'm a developer, I want to see what's under the hood!</a></p>
+    <p class="text-center"><a href="./devtools/" title="Test the version with sourcemaps!" class="btn btn-primary" style="word-wrap: break-word; white-space: normal;">I'm a developer, I want to see what's under the hood!</a></p>
     <% } else { %>
     <p class="crop">This is the <strong>Developer version</strong>, containing sourcemaps. <strong>Open your devtools and read/set breakpoints on the original source code!</strong></p>
     <p><a href="../" title="Back to the production version">Back to the production version</a></p>

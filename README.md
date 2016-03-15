@@ -14,6 +14,8 @@ You'll see that I developed for this project:
 
 The project is now ready to setup RxJS (there are routes, I've setup [sensors-checker](https://github.com/topheman/sensorsChecker.js), a module I made that will let me check for accelerometers - hooking those sensors with RxJS is one of the features I'll implement).
 
+[![image](https://raw.githubusercontent.com/topheman/rxjs-experiments/master/src/assets/images/qr-code.png)](https://topheman.github.io/rxjs-experiments/)
+
 ##Dev Workflow
 
 ###Install

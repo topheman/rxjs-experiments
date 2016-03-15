@@ -74,6 +74,16 @@
   z-index: $zindex-navbar-fixed+1;
 }
 
+#qr-code {
+  float: right;
+}
+@media only screen
+and (max-width: $grid-float-breakpoint)
+{
+  #qr-code {
+    display: none;
+  }
+}
 
 .summary a.active {
   font-weight: bold;
