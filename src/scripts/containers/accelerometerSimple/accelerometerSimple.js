@@ -13,7 +13,7 @@ import { mouseColor, accelerometerColor, windowResize } from '../../services/obs
 
 const mount = ({ location, params }, history) => {
   const html = require('./template.html');
-  console.log('mount reactive-screen', location, params, history);
+  console.log('mount /accelerometer/simple', location, params, history);
 
   // prepare display
   const container = document.getElementById('app-container');
@@ -22,7 +22,8 @@ const mount = ({ location, params }, history) => {
   const deviceOrientationActive = isDeviceOrientationActive();
   const hideModal = showModal({
     title: 'Infos',
-    content: `<p>${deviceOrientationActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}</p>`
+    content: `<p>${deviceOrientationActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}
+              <br><strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.</p>`
   });
   const enableMouseScroll = disableMouseScroll();
   const debug = document.getElementById('reactive-screen-debug');
@@ -60,7 +61,7 @@ const mount = ({ location, params }, history) => {
 
   const unMount = ({ location: l, params: p }, h) => {
     // cleanup what you messed up ...
-    console.log('unMount reactive-screen', l, p, h);
+    console.log('unMount /accelerometer/simple', l, p, h);
     document.getElementById('app-container').innerHTML = '';
     document.getElementById('app-container').classList.remove('full-screen');
     hideModal();// remove the modal (whatever its state) when leaving
