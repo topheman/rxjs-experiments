@@ -38,6 +38,9 @@ if (process.env.DEVTOOLS && process.env.NODE_ENV !== 'production') {
 
 const main = () => {
   console.log('Welcome! More infos at https://github.com/topheman/rxjs-experiments');
+  document.querySelector('button.navbar-toggle').addEventListener('click', () => {
+    document.querySelector('.collapse.navbar-collapse').classList.toggle('in');
+  });
   modal();
 };
 

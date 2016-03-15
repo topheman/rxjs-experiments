@@ -68,7 +68,7 @@ ul.site-networks li.github a span.icon{
 and (max-width: $grid-float-breakpoint) and (min-width : 370px)
 {
   ul.site-networks{
-    //right:70px;// commented because no hamburger menu
+    right:70px;// commented because no hamburger menu
   }
   ul.site-networks li{
     margin-left:0px;
@@ -87,7 +87,7 @@ and (max-width: $grid-float-breakpoint) and (min-width : 370px)
 @media only screen
 and (max-width : 370px) {
   ul.site-networks{
-    //display: none;// commented because no hamburger menu
+    display: none;// commented because no hamburger menu
   }
 }
 
