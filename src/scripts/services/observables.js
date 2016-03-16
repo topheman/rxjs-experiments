@@ -13,3 +13,17 @@ export const mouseColor = (windowSize) => Observable.fromEvent(window, 'mousemov
 export const accelerometerColor = () => Observable.fromEvent(window, 'deviceorientation')
     .map(e => ({ rRatio: e.alpha / 360, gRatio: (e.beta + 180) / 360, bRatio: (e.gamma + 90) / 180 }))
     .map(e => ({ r: (toColor(e.rRatio) + 127) % 255, g: toColor(e.gRatio), b: toColor(e.bRatio) }));
+
+export const mouseDrag = (elem, onMouseUp) => {
+  const mouseDown = Observable.fromEvent(elem, 'mousedown');
+  const mouseMove = Observable.fromEvent(elem, 'mousemove');
+  const mouseUp = Observable.fromEvent(elem, 'mouseup').map(() => onMouseUp());
+  return mouseDown.flatMap(() => {
+    const startTime = (new Date()).getTime();
+    return mouseMove.map(mm => ({
+      x: mm.clientX,
+      y: mm.clientY,
+      startTime
+    })).takeUntil(mouseUp);
+  });
+};

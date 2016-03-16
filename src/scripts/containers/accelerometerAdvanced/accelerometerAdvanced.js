@@ -9,11 +9,11 @@
 import { disableMouseScroll } from '../../services/utils';
 import { isDeviceOrientationActive } from '../../services/accelerometer';
 import { show as showModal } from '../../components/modal/modal';
-import { mouseColor, accelerometerColor, windowResize } from '../../services/observables';
+import { mouseColor, accelerometerColor, windowResize, mouseDrag } from '../../services/observables';
 
 const mount = ({ location, params }, history) => {
   const html = require('./template.html');
-  console.log('mount /accelerometer/simple', location, params, history);
+  console.log('mount /accelerometer/advanced', location, params, history);
 
   // prepare display
   const container = document.getElementById('app-container');
@@ -26,12 +26,30 @@ const mount = ({ location, params }, history) => {
               <br><strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.</p>`
   });
   const enableMouseScroll = disableMouseScroll();
-  const debug = document.getElementById('accelerometer-simple-debug');
+  const canvas = document.getElementById('accelerometer-advanced-canvas');
+  const context = canvas.getContext('2d');
 
+  // prepare callbacks
   const eventToBackground = (e) => `rgb(${e.r}, ${e.g}, ${e.b})`;
   const paint = (e) => {
     container.style.background = eventToBackground(e);
   };
+  const paintCanvas = (infos) => {
+    console.log(infos);
+    const radius = ((new Date()).getTime() - infos.startTime) * 0.02;
+
+    context.beginPath();
+    context.arc(infos.x, infos.y, radius, 0, 2 * Math.PI, false);
+    context.fillStyle = '#900000';
+    context.fill();
+    context.lineWidth = 2;
+    context.strokeStyle = 'black';
+    context.stroke();
+  };
+  const clearCanvas = () => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
   // prepare events
   const subscriptions = {};
   const windowSize = {
@@ -39,29 +57,30 @@ const mount = ({ location, params }, history) => {
     height: window.innerHeight
   };
   subscriptions.resize = windowResize().subscribe(e => {
-    console.log(e);
     windowSize.width = e.width;
     windowSize.height = e.height;
-    // maybe resize a canvas if using one ...
+    canvas.width = windowSize.width;
+    canvas.height = windowSize.height;
   });
   if (deviceOrientationActive === false) {
     subscriptions.mouseRatio = mouseColor(windowSize).subscribe((e) => {
-      console.log(e);
-      debug.innerHTML = JSON.stringify(e, null, '  ');
       paint(e);
     });
+    subscriptions.mouseDrag = mouseDrag(canvas, clearCanvas).subscribe(paintCanvas);
   }
   else {
     subscriptions.accelerometerRatio = accelerometerColor().subscribe((e) => {
       console.log(e);
-      debug.innerHTML = JSON.stringify(e, null, '  ');
       paint(e);
     });
   }
 
+  // launch
+  window.dispatchEvent(new Event('resize'));
+
   const unMount = ({ location: l, params: p }, h) => {
     // cleanup what you messed up ...
-    console.log('unMount /accelerometer/simple', l, p, h);
+    console.log('unMount /accelerometer/advanced', l, p, h);
     document.getElementById('app-container').innerHTML = '';
     document.getElementById('app-container').classList.remove('full-screen');
     hideModal();// remove the modal (whatever its state) when leaving
