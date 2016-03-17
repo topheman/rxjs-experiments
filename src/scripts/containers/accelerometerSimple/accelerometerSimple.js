@@ -52,7 +52,7 @@ const mount = ({ location, params }, history) => {
     subscriptions.mouseRatio = mouseColor(windowSize).subscribe(draw);
   }
   else {
-    subscriptions.accelerometerRatio = accelerometerColor().subscribe(draw);
+    subscriptions.accelerometerColor = accelerometerColor().subscribe(draw);
   }
 
   const unMount = ({ location: l, params: p }, h) => {

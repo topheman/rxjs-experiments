@@ -9,7 +9,7 @@
 import { disableMouseScroll } from '../../services/utils';
 import { isDeviceOrientationActive } from '../../services/accelerometer';
 import { show as showModal } from '../../components/modal/modal';
-import { mouseColor, accelerometerColor, windowResize, mouseDrag } from '../../services/observables';
+import { mouseColor, accelerometerColor, windowResize, mouseDrag, touchDrag } from '../../services/observables';
 
 const mount = ({ location, params }, history) => {
   const html = require('./template.html');
@@ -47,6 +47,10 @@ const mount = ({ location, params }, history) => {
     context.strokeStyle = 'black';
     context.stroke();
   };
+  const paintCanvasMultiple = (collectionInfos) => {
+    console.log('collectioninfos', collectionInfos);
+    collectionInfos.forEach(infos => paintCanvas(infos));
+  };
   const clearCanvas = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
   };
@@ -68,7 +72,8 @@ const mount = ({ location, params }, history) => {
     subscriptions.mouseDrag = mouseDrag(canvas, { windowSize, onMouseUp: clearCanvas }).subscribe(paintCanvas);
   }
   else {
-    subscriptions.accelerometerRatio = accelerometerColor().subscribe(paintBackground);
+    subscriptions.accelerometerColor = accelerometerColor().subscribe(paintBackground);
+    subscriptions.touchDrag = touchDrag(canvas, { windowSize, onFinalTouchEnd: () => console.log('final touchend')  }).subscribe(paintCanvasMultiple);
   }
 
   // launch

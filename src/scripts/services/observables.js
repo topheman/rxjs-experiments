@@ -38,3 +38,27 @@ export const mouseDrag = (elem, { windowSize, onMouseUp }) => {
     .takeUntil(mouseUp);
   });
 };
+
+export const touchDrag = (elem, { windowSize, onFinalTouchEnd }) => {
+  const touchStart = Observable.fromEvent(elem, 'touchstart');
+  const touchMove = Observable.fromEvent(elem, 'touchmove');
+  const touchEnd = Observable.fromEvent(elem, 'touchend').map((e) => {console.log('touchend', e); return e.touches.length === 0 ? onFinalTouchEnd() : e});
+  const pointToRatio = compilePointToRatio(windowSize);
+  const startTime = {};// stored by touch identifier
+  return touchStart.flatMap((e) => {
+    console.log('touchstart', e)
+    // for each new touch, store the time it was created linking to its identifier in startTime
+    Array.from(e.changedTouches).forEach(touch => startTime[touch.identifier] = (new Date()).getTime());
+    return touchMove.map(tm => {
+      console.log('touchmove', tm);
+      const touches = Array.from(tm.touches).map(touch => ({
+        x: touch.clientX,
+        y: touch.clientY,
+        color: ratioToRgbMouse(pointToRatio({ x: touch.clientX, y: touch.clientY })),
+        startTime: startTime[touch.identifier]
+      }));
+      return touches;
+    })
+    //.takeUntil(touchEnd);
+  });
+};
