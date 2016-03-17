@@ -22,8 +22,9 @@ const mount = ({ location, params }, history) => {
   const deviceOrientationActive = isDeviceOrientationActive();
   const hideModal = showModal({
     title: 'Infos',
-    content: `<p>${deviceOrientationActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}
-              <br><strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.</p>`
+    content: `<p>${deviceOrientationActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}</p>
+              <p><strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.</p>
+              <p><strong>${deviceOrientationActive ? 'Tap and drag (not yet implemented)' : 'Click and drag'}</strong> to draw circles!</p>`
   });
   const enableMouseScroll = disableMouseScroll();
   const canvas = document.getElementById('accelerometer-advanced-canvas');
@@ -31,7 +32,7 @@ const mount = ({ location, params }, history) => {
 
   // prepare callbacks
   const eventToBackground = (e) => `rgb(${e.r}, ${e.g}, ${e.b})`;
-  const paint = (e) => {
+  const paintBackground = (e) => {
     container.style.background = eventToBackground(e);
   };
   const paintCanvas = (infos) => {
@@ -40,7 +41,7 @@ const mount = ({ location, params }, history) => {
 
     context.beginPath();
     context.arc(infos.x, infos.y, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = '#900000';
+    context.fillStyle = eventToBackground(infos.color);
     context.fill();
     context.lineWidth = 2;
     context.strokeStyle = 'black';
@@ -63,16 +64,11 @@ const mount = ({ location, params }, history) => {
     canvas.height = windowSize.height;
   });
   if (deviceOrientationActive === false) {
-    subscriptions.mouseRatio = mouseColor(windowSize).subscribe((e) => {
-      paint(e);
-    });
-    subscriptions.mouseDrag = mouseDrag(canvas, clearCanvas).subscribe(paintCanvas);
+    subscriptions.mouseColor = mouseColor(windowSize).subscribe(paintBackground);
+    subscriptions.mouseDrag = mouseDrag(canvas, { windowSize, onMouseUp: clearCanvas }).subscribe(paintCanvas);
   }
   else {
-    subscriptions.accelerometerRatio = accelerometerColor().subscribe((e) => {
-      console.log(e);
-      paint(e);
-    });
+    subscriptions.accelerometerRatio = accelerometerColor().subscribe(paintBackground);
   }
 
   // launch

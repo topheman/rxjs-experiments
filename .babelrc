@@ -1,6 +1,7 @@
 {
   "presets": ["es2015"],
    "plugins": [
-     "dev-expression"
+     "dev-expression",
+     "transform-object-rest-spread"
    ]
 }

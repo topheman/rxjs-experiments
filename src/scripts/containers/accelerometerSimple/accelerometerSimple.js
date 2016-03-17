@@ -28,10 +28,16 @@ const mount = ({ location, params }, history) => {
   const enableMouseScroll = disableMouseScroll();
   const debug = document.getElementById('accelerometer-simple-debug');
 
+  // prepare callbacks
   const eventToBackground = (e) => `rgb(${e.r}, ${e.g}, ${e.b})`;
-  const paint = (e) => {
+  const paintBackground = (e) => {
     container.style.background = eventToBackground(e);
   };
+  const draw = (e) => {
+    debug.innerHTML = JSON.stringify(e, null, '  ');
+    paintBackground(e);
+  };
+
   // prepare events
   const subscriptions = {};
   const windowSize = {
@@ -39,24 +45,14 @@ const mount = ({ location, params }, history) => {
     height: window.innerHeight
   };
   subscriptions.resize = windowResize().subscribe(e => {
-    console.log(e);
     windowSize.width = e.width;
     windowSize.height = e.height;
-    // maybe resize a canvas if using one ...
   });
   if (deviceOrientationActive === false) {
-    subscriptions.mouseRatio = mouseColor(windowSize).subscribe((e) => {
-      console.log(e);
-      debug.innerHTML = JSON.stringify(e, null, '  ');
-      paint(e);
-    });
+    subscriptions.mouseRatio = mouseColor(windowSize).subscribe(draw);
   }
   else {
-    subscriptions.accelerometerRatio = accelerometerColor().subscribe((e) => {
-      console.log(e);
-      debug.innerHTML = JSON.stringify(e, null, '  ');
-      paint(e);
-    });
+    subscriptions.accelerometerRatio = accelerometerColor().subscribe(draw);
   }
 
   const unMount = ({ location: l, params: p }, h) => {
