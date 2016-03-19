@@ -40,6 +40,7 @@ export const mouseDrag = (elem, windowSize) => {
   });
 
   return {
+    start: mouseDown,
     move,
     end: mouseUp
   };
@@ -48,7 +49,7 @@ export const mouseDrag = (elem, windowSize) => {
 export const touchDrag = (elem, windowSize) => {
   const touchStart = Observable.fromEvent(elem, 'touchstart');
   const touchMove = Observable.fromEvent(elem, 'touchmove');
-  const touchEnd = Observable.fromEvent(elem, 'touchend').filter((e) => e.touches.length === 0);
+  const touchEnd = Observable.fromEvent(elem, 'touchend');
   const pointToRatio = compilePointToRatio(windowSize);
   const startTime = {};// stored by touch identifier
 
@@ -67,7 +68,10 @@ export const touchDrag = (elem, windowSize) => {
   });
 
   return {
+    // don't return intermediate touchstart events (rising in multitouch)
+    start: touchStart.filter((e) => e.touches.length === e.changedTouches.length),
     move,
-    end: touchEnd
+    // don't return intermediate touchend events (rising in multitouch)
+    end: touchEnd.filter((e) => e.touches.length === 0)
   };
 };

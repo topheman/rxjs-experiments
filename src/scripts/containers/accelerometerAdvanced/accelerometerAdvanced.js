@@ -12,6 +12,7 @@ import { show as showModal } from '../../components/modal/modal';
 import { mouseColor, accelerometerColor, windowResize, mouseDrag, touchDrag } from '../../services/observables';
 
 const mount = ({ location, params }, history) => {
+  const CLEAR_CANVAS_TIMEOUT = 2000;
   const html = require('./template.html');
   console.log('mount /accelerometer/advanced', location, params, history);
 
@@ -30,8 +31,10 @@ const mount = ({ location, params }, history) => {
   const canvas = document.getElementById('accelerometer-advanced-canvas');
   const context = canvas.getContext('2d');
   let requestId = null;
+  let timeoutClearCanvas = null;
   const displayInfos = {
-    circles: []
+    circles: [],
+    lastEndTime: 0// timestamp of the last final "end" callback
   };
 
   // prepare callbacks
@@ -59,9 +62,16 @@ const mount = ({ location, params }, history) => {
   const clearCanvas = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
   };
+  const onDragStart = () => {
+    // if restarting to paint between 0 millisecs and CLEAR_CANVAS_TIMEOUT millisecs since last "end", callback, cancel clearCanvas
+    if ((new Date()).getTime() - displayInfos.lastEndTime < CLEAR_CANVAS_TIMEOUT) {
+      clearTimeout(timeoutClearCanvas);
+    }
+  };
   const onDragEnd = () => {
     updateCircles([]);// clear circles
-    clearCanvas();
+    displayInfos.lastEndTime = (new Date()).getTime();
+    timeoutClearCanvas = setTimeout(clearCanvas, CLEAR_CANVAS_TIMEOUT);
   };
   const draw = () => {
     drawCircles(displayInfos.circles);
@@ -83,12 +93,14 @@ const mount = ({ location, params }, history) => {
   if (deviceOrientationActive === false) {
     subscriptions.mouseColor = mouseColor(windowSize).subscribe(paintBackground);
     const _mouseDrag = mouseDrag(canvas, windowSize);
+    subscriptions.mouseDragStart = _mouseDrag.start.subscribe(onDragStart);
     subscriptions.mouseDragMove = _mouseDrag.move.subscribe((circle) => updateCircles([circle]));
     subscriptions.mouseDragEnd = _mouseDrag.end.subscribe(onDragEnd);
   }
   else {
     subscriptions.accelerometerColor = accelerometerColor().subscribe(paintBackground);
     const _touchDrag = touchDrag(canvas, windowSize);
+    subscriptions.touchDragStart = _touchDrag.start.subscribe(onDragStart);
     subscriptions.touchDragMove = _touchDrag.move.subscribe(updateCircles);
     subscriptions.touchDragEnd = _touchDrag.end.subscribe(onDragEnd);
   }
@@ -104,6 +116,7 @@ const mount = ({ location, params }, history) => {
     document.getElementById('app-container').classList.remove('full-screen');
     hideModal();// remove the modal (whatever its state) when leaving
     enableMouseScroll();// reenable mouse scroll for other routes
+    clearTimeout(timeoutClearCanvas);
     cancelAnimationFrame(requestId);
     // unsubscribe from the observable
     for (const sub in subscriptions) {
