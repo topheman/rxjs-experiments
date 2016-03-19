@@ -11,21 +11,19 @@ import { isDeviceOrientationActive } from '../../services/accelerometer';
 import { show as showModal } from '../../components/modal/modal';
 import { mouseColor, accelerometerColor, windowResize, mouseDrag, touchDrag } from '../../services/observables';
 
-const mount = ({ location, params }, history) => {
+const mount = () => {
   const CLEAR_CANVAS_TIMEOUT = 2000;
   const html = require('./template.html');
-  console.log('mount /accelerometer/advanced', location, params, history);
-
   // prepare display
   const container = document.getElementById('app-container');
   container.innerHTML = html;
   container.classList.add('full-screen');
   const deviceOrientationActive = isDeviceOrientationActive();
+  const touchSupportActive = 'ontouchstart' in document.documentElement;
   const hideModal = showModal({
-    title: 'Infos',
-    content: `<p>${deviceOrientationActive ? 'An accelerometer has been detected on your device, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}</p>
-              <p><strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.</p>
-              <p><strong>${deviceOrientationActive ? 'Tap and drag (not yet implemented)' : 'Click and drag'}</strong> to draw circles!</p>`
+    title: 'Multitouch/Mouse drag',
+    content: `<p class="lead"><strong>${touchSupportActive ? 'Tap and drag' : 'Click and drag'}</strong> to draw circles!</p>
+              ${touchSupportActive ? '<p><strong>Use ALL your fingers ! Multitouch is supported !</strong></p>' : '<p>Try it on your mobile to test the multi-touch!</p>'}`
   });
   const enableMouseScroll = disableMouseScroll();
   const canvas = document.getElementById('accelerometer-advanced-canvas');
@@ -92,13 +90,17 @@ const mount = ({ location, params }, history) => {
   });
   if (deviceOrientationActive === false) {
     subscriptions.mouseColor = mouseColor(windowSize).subscribe(paintBackground);
+  }
+  else {
+    subscriptions.accelerometerColor = accelerometerColor().subscribe(paintBackground);
+  }
+  if (touchSupportActive === false) {
     const _mouseDrag = mouseDrag(canvas, windowSize);
     subscriptions.mouseDragStart = _mouseDrag.start.subscribe(onDragStart);
     subscriptions.mouseDragMove = _mouseDrag.move.subscribe((circle) => updateCircles([circle]));
     subscriptions.mouseDragEnd = _mouseDrag.end.subscribe(onDragEnd);
   }
   else {
-    subscriptions.accelerometerColor = accelerometerColor().subscribe(paintBackground);
     const _touchDrag = touchDrag(canvas, windowSize);
     subscriptions.touchDragStart = _touchDrag.start.subscribe(onDragStart);
     subscriptions.touchDragMove = _touchDrag.move.subscribe(updateCircles);
@@ -109,9 +111,8 @@ const mount = ({ location, params }, history) => {
   window.dispatchEvent(new Event('resize'));
   draw();
 
-  const unMount = ({ location: l, params: p }, h) => {
+  const unMount = () => {
     // cleanup what you messed up ...
-    console.log('unMount /accelerometer/advanced', l, p, h);
     document.getElementById('app-container').innerHTML = '';
     document.getElementById('app-container').classList.remove('full-screen');
     hideModal();// remove the modal (whatever its state) when leaving

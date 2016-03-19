@@ -22,6 +22,7 @@
 
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
+          <li><a href="#/multitouch-mouse-drag">Multitouch/Mouse drag</a></li>
           <li><a href="#/accelerometer">Accelerometer</a></li>
           <li><a href="#/router">micro-router</a></li>
         </ul>
@@ -47,18 +48,24 @@
 </div>
 <div id="home-container" style="display: none;">
   <div class="container">
+    <img id="qr-code" src="<%= require('./assets/images/qr-code.png') %>"/>
     <p style="margin-top: 20px;">
-      Some description ...<img id="qr-code" src="<%= require('./assets/images/qr-code.png') %>"/>
+      <a href="https://github.com/Reactive-Extensions/RxJS">RxJS</a> is a set of libraries that lets you do <strong>reactive programming</strong> (it exists in many other languages aside of JavaScript). I wanted to try it out (I've been doing a lot of functional programming lately, both share a lot of similar concepts).
     </p>
-    <p class="text-center"><a class="btn btn-primary btn-lg" href="#/accelerometer">Check out the DEMO!!!</a></p>
-    <p>Checkout the homemade <a href="#/router">router</a>, based on <code>history</code>.</p>
+    <p>RxJS is really good to simplify the management of events with intermediate state (such as drag'n drop).</p>
+    <p>So far, I've set up two demos:</p>
+    <ul>
+      <li><a href="#/multitouch-mouse-drag" style="font-weight: bold;">Multitouch/Mouse based canvas drawing</a></li>
+      <li><a href="#/accelerometer" style="font-weight: bold;">Accelerometer based screen painting</a></li>
+    </ul>
+    <p>No framework is involved, I made a <a href="#/router">micro-router</a> for the routing, based on <code>history</code>.</p>
     <% if (htmlWebpackPlugin.options.DEVTOOLS !== null) { %>
     <!-- This part will appear if you set DEVTOOLS=true or DEVTOOLS=false when launching an npm task -->
     <% if (!htmlWebpackPlugin.options.DEVTOOLS) { %>
     <p class="crop">
       This is the <strong>production version</strong>. If you want to play with the ES6+ original source code:
     </p>
-    <p class="text-center"><a href="./devtools/" title="Test the version with sourcemaps!" class="btn btn-primary" style="word-wrap: break-word; white-space: normal;">I'm a developer, I want to see what's under the hood!</a></p>
+    <p class="text-center"><a href="./devtools/" title="Test the version with sourcemaps!" class="btn btn-primary btn-xs" style="word-wrap: break-word; white-space: normal;">I'm a developer, I want to see what's under the hood!</a></p>
     <% } else { %>
     <p class="crop">This is the <strong>Developer version</strong>, containing sourcemaps. <strong>Open your devtools and read/set breakpoints on the original source code!</strong></p>
     <p><a href="../" title="Back to the production version">Back to the production version</a></p>
@@ -66,7 +73,7 @@
     <% } %>
   </div>
   <footer class="container">
-    <p><span id="copyright-year"></span><a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset</p>
+    <p><span id="copyright-year">©<%= (new Date()).getFullYear() %></span> <a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset</p>
     <p>
       <iframe width="78px" height="28px" title="Twitter Tweet Button" style="border:0;overflow:hidden;" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?count=none&amp;dnt=false&amp;lang=en&amp;original_referer=http%3A%2F%2Ftopheman.github.io%2Frxjs-experiments%2F&amp;size=l&amp;text=%23RxJS%20experiments%20%23Webpack%20%23Babel&amp;type=share&amp;url=https%3A%2F%2Fgithub.com%2Ftopheman%2Frxjs-experiments%2F&amp;via=topheman" data-reactid=".0.2.0.6"></iframe>
     </p>
