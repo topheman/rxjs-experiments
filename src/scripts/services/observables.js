@@ -22,12 +22,13 @@ export const accelerometerColor = () => Observable.fromEvent(window, 'deviceorie
     .map(e => ({ rRatio: e.alpha / 360, gRatio: (e.beta + 180) / 360, bRatio: (e.gamma + 90) / 180 }))
     .map(ratioToRgbAccelerometer);
 
-export const mouseDrag = (elem, { windowSize, onMouseUp }) => {
+export const mouseDrag = (elem, windowSize) => {
   const mouseDown = Observable.fromEvent(elem, 'mousedown');
   const mouseMove = Observable.fromEvent(elem, 'mousemove');
-  const mouseUp = Observable.fromEvent(elem, 'mouseup').map(() => onMouseUp());
+  const mouseUp = Observable.fromEvent(elem, 'mouseup');
   const pointToRatio = compilePointToRatio(windowSize);
-  return mouseDown.flatMap(() => {
+
+  const move = mouseDown.flatMap(() => {
     const startTime = (new Date()).getTime();
     return mouseMove.map(mm => ({
       x: mm.clientX,
@@ -37,20 +38,24 @@ export const mouseDrag = (elem, { windowSize, onMouseUp }) => {
     }))
     .takeUntil(mouseUp);
   });
+
+  return {
+    move,
+    end: mouseUp
+  };
 };
 
-export const touchDrag = (elem, { windowSize, onFinalTouchEnd }) => {
+export const touchDrag = (elem, windowSize) => {
   const touchStart = Observable.fromEvent(elem, 'touchstart');
   const touchMove = Observable.fromEvent(elem, 'touchmove');
-  const touchEnd = Observable.fromEvent(elem, 'touchend').map((e) => {console.log('touchend', e); return e.touches.length === 0 ? onFinalTouchEnd() : e});
+  const touchEnd = Observable.fromEvent(elem, 'touchend').filter((e) => e.touches.length === 0);
   const pointToRatio = compilePointToRatio(windowSize);
   const startTime = {};// stored by touch identifier
-  return touchStart.flatMap((e) => {
-    console.log('touchstart', e)
+
+  const move = touchStart.flatMap((e) => {
     // for each new touch, store the time it was created linking to its identifier in startTime
     Array.from(e.changedTouches).forEach(touch => startTime[touch.identifier] = (new Date()).getTime());
     return touchMove.map(tm => {
-      console.log('touchmove', tm);
       const touches = Array.from(tm.touches).map(touch => ({
         x: touch.clientX,
         y: touch.clientY,
@@ -58,7 +63,11 @@ export const touchDrag = (elem, { windowSize, onFinalTouchEnd }) => {
         startTime: startTime[touch.identifier]
       }));
       return touches;
-    })
-    //.takeUntil(touchEnd);
+    });
   });
+
+  return {
+    move,
+    end: touchEnd
+  };
 };

@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import './scripts/libs/requestAnimationFrame.polyfill';
 import modal from './scripts/components/modal/modal';
 import { router, hashHistory } from './scripts/libs/micro-router';
 import routes from './routes';

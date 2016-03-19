@@ -29,30 +29,43 @@ const mount = ({ location, params }, history) => {
   const enableMouseScroll = disableMouseScroll();
   const canvas = document.getElementById('accelerometer-advanced-canvas');
   const context = canvas.getContext('2d');
+  let requestId = null;
+  const displayInfos = {
+    circles: []
+  };
 
   // prepare callbacks
   const eventToBackground = (e) => `rgb(${e.r}, ${e.g}, ${e.b})`;
   const paintBackground = (e) => {
     container.style.background = eventToBackground(e);
   };
-  const paintCanvas = (infos) => {
-    console.log(infos);
-    const radius = ((new Date()).getTime() - infos.startTime) * 0.02;
+  const updateCircles = (circles) => {
+    displayInfos.circles = circles;
+  };
+  const drawCircle = (circle) => {
+    const radius = ((new Date()).getTime() - circle.startTime) * 0.02;
 
     context.beginPath();
-    context.arc(infos.x, infos.y, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = eventToBackground(infos.color);
+    context.arc(circle.x, circle.y, radius, 0, 2 * Math.PI, false);
+    context.fillStyle = eventToBackground(circle.color);
     context.fill();
     context.lineWidth = 2;
     context.strokeStyle = 'black';
     context.stroke();
   };
-  const paintCanvasMultiple = (collectionInfos) => {
-    console.log('collectioninfos', collectionInfos);
-    collectionInfos.forEach(infos => paintCanvas(infos));
+  const drawCircles = (circles) => {
+    circles.forEach(circle => drawCircle(circle));
   };
   const clearCanvas = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
+  };
+  const onDragEnd = () => {
+    updateCircles([]);// clear circles
+    clearCanvas();
+  };
+  const draw = () => {
+    drawCircles(displayInfos.circles);
+    requestId = requestAnimationFrame(draw);
   };
 
   // prepare events
@@ -69,15 +82,20 @@ const mount = ({ location, params }, history) => {
   });
   if (deviceOrientationActive === false) {
     subscriptions.mouseColor = mouseColor(windowSize).subscribe(paintBackground);
-    subscriptions.mouseDrag = mouseDrag(canvas, { windowSize, onMouseUp: clearCanvas }).subscribe(paintCanvas);
+    const _mouseDrag = mouseDrag(canvas, windowSize);
+    subscriptions.mouseDragMove = _mouseDrag.move.subscribe((circle) => updateCircles([circle]));
+    subscriptions.mouseDragEnd = _mouseDrag.end.subscribe(onDragEnd);
   }
   else {
     subscriptions.accelerometerColor = accelerometerColor().subscribe(paintBackground);
-    subscriptions.touchDrag = touchDrag(canvas, { windowSize, onFinalTouchEnd: () => console.log('final touchend')  }).subscribe(paintCanvasMultiple);
+    const _touchDrag = touchDrag(canvas, windowSize);
+    subscriptions.touchDragMove = _touchDrag.move.subscribe(updateCircles);
+    subscriptions.touchDragEnd = _touchDrag.end.subscribe(onDragEnd);
   }
 
   // launch
   window.dispatchEvent(new Event('resize'));
+  draw();
 
   const unMount = ({ location: l, params: p }, h) => {
     // cleanup what you messed up ...
@@ -86,6 +104,7 @@ const mount = ({ location, params }, history) => {
     document.getElementById('app-container').classList.remove('full-screen');
     hideModal();// remove the modal (whatever its state) when leaving
     enableMouseScroll();// reenable mouse scroll for other routes
+    cancelAnimationFrame(requestId);
     // unsubscribe from the observable
     for (const sub in subscriptions) {
       if (subscriptions.hasOwnProperty(sub)) {
