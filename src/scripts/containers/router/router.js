@@ -5,7 +5,7 @@
  * @param location
  * @returns {unMount}
  */
-const mount = ({ location, params }, history) => {
+const mount = ({ location, params, history }) => {
   console.log('mount router', location, params, history);
   const html = require('./template.html');
   document.getElementById('app-container').innerHTML = html;

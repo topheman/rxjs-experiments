@@ -5,7 +5,7 @@
  * @param location
  * @returns {unMount}
  */
-const mount = ({ location, params }, history) => {
+const mount = ({ location, params, history }) => {
   console.log('mount home', location, params, history);
   document.getElementById('home-container').style.display = 'block';
   const unMount = ({ location: l, params: p }, h) => {
