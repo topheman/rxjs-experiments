@@ -115,7 +115,7 @@ const mount = () => {
     // cleanup what you messed up ...
     document.getElementById('app-container').innerHTML = '';
     document.getElementById('app-container').classList.remove('full-screen');
-    hideModal();// remove the modal (whatever its state) when leaving
+    hideModal(true);// remove the modal (whatever its state) when leaving
     enableMouseScroll();// reenable mouse scroll for other routes
     clearTimeout(timeoutClearCanvas);
     cancelAnimationFrame(requestId);

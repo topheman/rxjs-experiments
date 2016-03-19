@@ -40,11 +40,21 @@ const clickToHide = (e) => {
   }
 };
 
-const hide = () => {
+/**
+ * Since hide does async work on the DOM, if you call it on a cleanup task, call it with force=true
+ * @param {Boolean} [force]
+ */
+const hide = (force = false) => {
   bootstrapModal.classList.remove('in');
-  setTimeout(() => bootstrapModal.style.display = 'none', MODAL_TRANSITION_DURATION);
   bootstrapModalBackdrop.classList.remove('in');
-  setTimeout(() => bootstrapModalBackdrop.style.display = 'none', MODAL_BACKDROP_TRANSITION_DURATION);
+  if (force === false) {
+    setTimeout(() => bootstrapModal.style.display = 'none', MODAL_TRANSITION_DURATION);
+    setTimeout(() => bootstrapModalBackdrop.style.display = 'none', MODAL_BACKDROP_TRANSITION_DURATION);
+  }
+  else {
+    bootstrapModal.style.display = 'none';
+    bootstrapModalBackdrop.style.display = 'none';
+  }
 };
 
 export const show = ({ title = '', content = '' } = {}) => {
