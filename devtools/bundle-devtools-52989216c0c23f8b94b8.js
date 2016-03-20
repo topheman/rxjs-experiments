@@ -4,7 +4,7 @@
  * Playing with RxJS
  * 
  * @version v0.2.0 - 20/03/2016
- * @revision #4c58e33 - https://github.com/topheman/rxjs-experiments/tree/4c58e33d82f91d8217520b46452118335ffcf97b
+ * @revision #2d0e83c - https://github.com/topheman/rxjs-experiments/tree/2d0e83cdae083abd9387e17cd618983cb7ed1ca8
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @copyright 2016(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT
@@ -4291,7 +4291,7 @@
 	  var deviceOrientationActive = (0, _accelerometer.isDeviceOrientationActive)();
 	  var hideModal = (0, _modal.show)({
 	    title: 'Accelerometer',
-	    content: '<p>' + (deviceOrientationActive ? '<strong>An accelerometer has been detected on your device</strong>, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.') + '</p>\n              <p class="lead"><strong>Move your ' + (deviceOrientationActive ? 'phone' : 'mouse') + '</strong> to change the background color.</p>'
+	    content: '<p>' + (deviceOrientationActive ? '<strong>An accelerometer has been detected on your device</strong>, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.<br><br>Try it on your mobile to test it with accelerometer support!') + '</p>\n              <p class="lead"><strong>Move your ' + (deviceOrientationActive ? 'phone' : 'mouse') + '</strong> to change the background color.</p>'
 	  });
 	  var enableMouseScroll = (0, _utils.disableMouseScroll)();
 	  var debug = document.getElementById('accelerometer-debug');
@@ -15646,4 +15646,4 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=bundle-devtools-e38306f9677a9f80e71a.js.map
+//# sourceMappingURL=bundle-devtools-52989216c0c23f8b94b8.js.map
