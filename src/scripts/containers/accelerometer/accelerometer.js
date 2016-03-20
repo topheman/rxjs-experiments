@@ -25,7 +25,7 @@ const mount = () => {
               <p class="lead"><strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.</p>`
   });
   const enableMouseScroll = disableMouseScroll();
-  const debug = document.getElementById('accelerometer-simple-debug');
+  const debug = document.getElementById('accelerometer-debug');
 
   // prepare callbacks
   const eventToBackground = (e) => `rgb(${e.r}, ${e.g}, ${e.b})`;

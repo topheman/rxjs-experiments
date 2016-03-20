@@ -26,7 +26,7 @@ const mount = () => {
               ${touchSupportActive ? '<p><strong>Use ALL your fingers ! Multitouch is supported !</strong></p>' : '<p>Try it on your mobile to test the multi-touch!</p>'}`
   });
   const enableMouseScroll = disableMouseScroll();
-  const canvas = document.getElementById('accelerometer-advanced-canvas');
+  const canvas = document.getElementById('drag-canvas');
   const context = canvas.getContext('2d');
   let requestId = null;
   let timeoutClearCanvas = null;

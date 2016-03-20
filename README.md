@@ -3,18 +3,22 @@ RxJS Experiments
 
 [![Build Status](https://travis-ci.org/topheman/rxjs-experiments.svg?branch=master)](https://travis-ci.org/topheman/rxjs-experiments)
 
-Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter) (more there about the dev workflow).
+The motivation of this project is to try out [RxJS](https://github.com/Reactive-Extensions/RxJS), without relying on any framework (CycleJS, ReactJS or AngularJS 2), not to experience the library in a specific context.
 
-This project is at its early stage of development. The motivation is to try out [RxJS](https://github.com/Reactive-Extensions/RxJS), without relying on any framework (CycleJS, ReactJS or AngularJS 2), not to experience the library in a specific context.
+So far, I implemented the following features:
 
-You'll see that I developed for this project:
+* multitouch & mouse drag
+* accelerometer
+
+[![image](https://raw.githubusercontent.com/topheman/rxjs-experiments/master/src/assets/images/qr-code.png)](https://topheman.github.io/rxjs-experiments/)
+
+For the purpose fo this project, I developed the following:
 
 * A [micro-router](https://github.com/topheman/rxjs-experiments/tree/master/src/scripts/libs/micro-router) (based on [history](https://github.com/mjackson/history))
 * A VanillaJS implementation of the [bootstrap modal](https://github.com/topheman/rxjs-experiments/tree/master/src/scripts/components/modal)
+* It also uses [sensors-checker](https://github.com/topheman/sensorsChecker.js) to detect accelerometers on devices
 
-The project is now ready to setup RxJS (there are routes, I've setup [sensors-checker](https://github.com/topheman/sensorsChecker.js), a module I made that will let me check for accelerometers - hooking those sensors with RxJS is one of the features I'll implement).
-
-[![image](https://raw.githubusercontent.com/topheman/rxjs-experiments/master/src/assets/images/qr-code.png)](https://topheman.github.io/rxjs-experiments/)
+Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter) (more there about the dev workflow).
 
 ##Dev Workflow
 

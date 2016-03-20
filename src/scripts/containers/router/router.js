@@ -14,7 +14,7 @@ const mount = ({ location, params, history }) => {
     infos += `<li>${param}: <strong>${params[param]}</strong></li>`;// eslint-disable-line no-param-reassign
     return infos;
   }, '');
-  const unMount = ({ location: l, params: p }, h) => {
+  const unMount = ({ location: l, params: p, history: h }) => {
     console.log('unMount router', l, p, h);
     document.getElementById('app-container').innerHTML = '';
   };

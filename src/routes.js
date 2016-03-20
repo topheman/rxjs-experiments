@@ -5,12 +5,12 @@ import routerHandler from './scripts/containers/router/router';
 import accelerometerHandler from './scripts/containers/accelerometer/accelerometer';
 import dragHandler from './scripts/containers/drag/drag';
 
-const generateHandler = (name, handler) => ({ location, params }, history) => {
+const generateHandler = (name, handler) => ({ location, params, history }) => {
   console.log(`Mounting ${name}`, location, params, history);
   if (typeof handler === 'function') {
-    return handler(location, history);
+    return handler();
   }
-  return ({ location: l, params: p }, h) => {
+  return ({ location: l, params: p, history: h }) => {
     console.log(`Unmounting ${name}`, l, p, h);
   };
 };

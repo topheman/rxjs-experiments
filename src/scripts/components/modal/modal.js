@@ -33,8 +33,6 @@ const init = () => {
 export default init;
 
 const clickToHide = (e) => {
-  console.log('clickToHide');
-  console.log(e.target);
   if (e.target.classList.contains('close-on-click')) {
     return hide();
   }

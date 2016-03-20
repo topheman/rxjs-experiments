@@ -1,6 +1,15 @@
-<div  class="container">
+<div class="container page-router">
   <h2>Router</h2>
-  <p>Some description ...</p>
+  <p>I needed a frontend router with the following features:</p>
+  <ul>
+    <li>history support (back button)</li>
+    <li>mutiple routes / customizable routes</li>
+    <li>deferred mounting (only mount a route when a promise is resolved)</li>
+    <li>params support (optional)</li>
+  </ul>
+  <p>Frameworks like AngularJS, EmberJS, React-Router (not a framework) provide that out of the box. This site doesn't use any of them (by choice - I wanted to test RxJS outside of any framework).</p>
+  <p>So, I made a micro-router myself, based on <a href="https://github.com/mjackson/history">history</a> - it's supported by unit-tests.</p>
+  <h4>Examples</h4>
   <p>Matched route: <strong id="matched-route"></strong></p>
   <p>Match params:</p>
   <ul id="matched-params"></ul>
@@ -19,7 +28,5 @@
       <li><a href="#/router/posts/libraries/redux/edit">/router/posts/libraries/redux/edit</a></li>
       <li><a href="#/router/posts/libraries/reactjs/edit">/router/posts/libraries/reactjs/edit</a></li>
     </ul>
-    <li><a href="#/router/resolve">/router/resolve</a></li>
-    <li><a href="#/some-unknown-route">/some-unknown-route</a></li>
   </ul>
 </div>
