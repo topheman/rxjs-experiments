@@ -21,7 +21,7 @@ const mount = () => {
   const deviceOrientationActive = isDeviceOrientationActive();
   const hideModal = showModal({
     title: 'Accelerometer',
-    content: `<p>${deviceOrientationActive ? '<strong>An accelerometer has been detected on your device</strong>, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.'}</p>
+    content: `<p>${deviceOrientationActive ? '<strong>An accelerometer has been detected on your device</strong>, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.<br><br>Try it on your mobile to test it with accelerometer support!'}</p>
               <p class="lead"><strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.</p>`
   });
   const enableMouseScroll = disableMouseScroll();

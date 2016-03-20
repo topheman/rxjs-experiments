@@ -7,8 +7,10 @@ The motivation of this project is to try out [RxJS](https://github.com/Reactive-
 
 So far, I implemented the following features:
 
-* multitouch & mouse drag
-* accelerometer
+* **Multitouch/Mouse** painting on a canvas
+* **Accelerometer** based background color (fallback on mouse position if no accelerometer)
+
+Works on both desktop/mobile, but you'll enjoy it more on your tablet/phone (with touch and accelerometer).
 
 [![image](https://raw.githubusercontent.com/topheman/rxjs-experiments/master/src/assets/images/qr-code.png)](https://topheman.github.io/rxjs-experiments/)
 
@@ -18,9 +20,13 @@ For the purpose fo this project, I developed the following:
 * A VanillaJS implementation of the [bootstrap modal](https://github.com/topheman/rxjs-experiments/tree/master/src/scripts/components/modal)
 * It also uses [sensors-checker](https://github.com/topheman/sensorsChecker.js) to detect accelerometers on devices
 
-Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter) (more there about the dev workflow).
+Resources:
+
+* [Read the blog post about this project](http://dev.topheman.com/rxjs-first-steps/)
 
 ##Dev Workflow
+
+Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter).
 
 ###Install
 
