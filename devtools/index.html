@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <title>Topheman - RxJS Experiments</title>
-<link href="main-devtools-4faf788f50e477ffd285.css" rel="stylesheet"></head>
+<link href="main-devtools-e38306f9677a9f80e71a.css" rel="stylesheet"></head>
 </head>
 <body>
 <div id="header">
@@ -22,6 +22,7 @@
 
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
+          <li><a href="#/multitouch-mouse-drag">Multitouch/Mouse drag</a></li>
           <li><a href="#/accelerometer">Accelerometer</a></li>
           <li><a href="#/router">micro-router</a></li>
         </ul>
@@ -47,11 +48,17 @@
 </div>
 <div id="home-container" style="display: none;">
   <div class="container">
+    <img id="qr-code" src="data:image/png;base64,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"/>
     <p style="margin-top: 20px;">
-      Some description ...<img id="qr-code" src="data:image/png;base64,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"/>
+      <a href="https://github.com/Reactive-Extensions/RxJS">RxJS</a> is a set of libraries that lets you do <strong>reactive programming</strong> (it exists in many other languages aside of JavaScript). I wanted to try it out (I've been doing a lot of functional programming lately, both share a lot of similar concepts).
     </p>
-    <p class="text-center"><a class="btn btn-primary btn-lg" href="#/accelerometer">Check out the DEMO!!!</a></p>
-    <p>Checkout the homemade <a href="#/router">router</a>, based on <code>history</code>.</p>
+    <p>RxJS is really good to simplify the management of events with intermediate state (such as drag'n drop).</p>
+    <p>So far, I've set up two demos:</p>
+    <ul>
+      <li><a href="#/multitouch-mouse-drag" style="font-weight: bold;" title="Test the multitouch with rxjs">Multitouch/Mouse based canvas drawing</a></li>
+      <li><a href="#/accelerometer" style="font-weight: bold;" title="Test the accelerometer with rxjs">Accelerometer based screen painting</a></li>
+    </ul>
+    <p>No framework is involved, I made a <a href="#/router">micro-router</a> for the routing, based on <code>history</code>.</p>
     
     <!-- This part will appear if you set DEVTOOLS=true or DEVTOOLS=false when launching an npm task -->
     
@@ -61,7 +68,7 @@
     
   </div>
   <footer class="container">
-    <p><span id="copyright-year"></span><a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset</p>
+    <p><span id="copyright-year">©2016</span> <a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset</p>
     <p>
       <iframe width="78px" height="28px" title="Twitter Tweet Button" style="border:0;overflow:hidden;" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?count=none&amp;dnt=false&amp;lang=en&amp;original_referer=http%3A%2F%2Ftopheman.github.io%2Frxjs-experiments%2F&amp;size=l&amp;text=%23RxJS%20experiments%20%23Webpack%20%23Babel&amp;type=share&amp;url=https%3A%2F%2Fgithub.com%2Ftopheman%2Frxjs-experiments%2F&amp;via=topheman" data-reactid=".0.2.0.6"></iframe>
     </p>
@@ -69,7 +76,7 @@
 </div>
 <div id="app-container"></div>
 <!-- keep the following lines -->
-<script src="bundle-devtools-4faf788f50e477ffd285.js"></script>
+<script src="bundle-devtools-e38306f9677a9f80e71a.js"></script>
 <!-- Google Analytics -->
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -90,8 +97,8 @@
  * 
  * Playing with RxJS
  * 
- * @version v0.2.0 - 15/03/2016
- * @revision #578fec3 - https://github.com/topheman/rxjs-experiments/tree/578fec32b2693659e2eb77df713bb149b4483234
+ * @version v0.2.0 - 20/03/2016
+ * @revision #4c58e33 - https://github.com/topheman/rxjs-experiments/tree/4c58e33d82f91d8217520b46452118335ffcf97b
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @copyright 2016(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT
