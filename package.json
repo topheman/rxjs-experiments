@@ -1,6 +1,6 @@
 {
   "name": "rxjs-experiments",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Playing with RxJS",
   "scripts": {
     "start": "npm run webpack",
