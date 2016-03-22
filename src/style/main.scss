@@ -85,6 +85,15 @@ and (max-width: $grid-float-breakpoint)
   }
 }
 
+ul.demo-links {
+  padding-left: 0px;
+  text-align: center;
+  li {
+    list-style: none;
+    margin: 5px 0px;
+  }
+}
+
 .summary a.active {
   font-weight: bold;
 }

@@ -54,9 +54,9 @@
     </p>
     <p>RxJS is really good to simplify the management of events with intermediate state (such as drag'n drop).</p>
     <p>So far, I've set up two demos:</p>
-    <ul>
-      <li><a href="#/multitouch-mouse-drag" style="font-weight: bold;" title="Test the multitouch with rxjs">Multitouch/Mouse based canvas drawing</a></li>
-      <li><a href="#/accelerometer" style="font-weight: bold;" title="Test the accelerometer with rxjs">Accelerometer based screen painting</a></li>
+    <ul class="demo-links">
+      <li><a href="#/multitouch-mouse-drag" class="btn btn-primary" title="Test the multitouch with rxjs">Multitouch/Mouse based canvas drawing</a></li>
+      <li><a href="#/accelerometer" class="btn btn-primary" title="Test the accelerometer with rxjs">Accelerometer based screen painting</a></li>
     </ul>
     <p>No framework is involved, I made a <a href="#/router">micro-router</a> for the routing, based on <code>history</code>.</p>
     <% if (htmlWebpackPlugin.options.DEVTOOLS !== null) { %>
@@ -65,7 +65,7 @@
     <p class="crop">
       This is the <strong>production version</strong>. If you want to play with the ES6+ original source code:
     </p>
-    <p class="text-center"><a href="./devtools/" title="Test the version with sourcemaps!" class="btn btn-primary btn-xs" style="word-wrap: break-word; white-space: normal;">I'm a developer, I want to see what's under the hood!</a></p>
+    <p class="text-center"><strong><a href="./devtools/" title="Test the version with sourcemaps!">I'm a developer, I want to see what's under the hood!</a></strong></p>
     <% } else { %>
     <p class="crop">This is the <strong>Developer version</strong>, containing sourcemaps. <strong>Open your devtools and read/set breakpoints on the original source code!</strong></p>
     <p><a href="../" title="Back to the production version">Back to the production version</a></p>
