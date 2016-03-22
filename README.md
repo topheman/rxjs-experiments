@@ -14,6 +14,8 @@ Works on both desktop/mobile, but you'll enjoy it more on your tablet/phone (wit
 
 [![image](https://raw.githubusercontent.com/topheman/rxjs-experiments/master/src/assets/images/qr-code.png)](https://topheman.github.io/rxjs-experiments/)
 
+#####[Run the Demo](https://topheman.github.io/rxjs-experiments/) / [Check out the sources of the Observables](https://github.com/topheman/rxjs-experiments/blob/master/src/scripts/services/observables.js)
+
 For the purpose fo this project, I developed the following:
 
 * A [micro-router](https://github.com/topheman/rxjs-experiments/tree/master/src/scripts/libs/micro-router) (based on [history](https://github.com/mjackson/history))
