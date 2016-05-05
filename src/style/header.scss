@@ -97,3 +97,14 @@ and (max-width : 370px) {
 .navbar-default .navbar-toggle span.icon-bar{
   background-color: #900000;
 }
+
+/** logo on the left */
+.navbar-brand.logo {
+  padding-left: 50px;
+  background-image: url(../assets/images/rxjs-logo.png);
+  background-size: 45px;
+  background-position: 2px 2px;
+  background-repeat: no-repeat;
+  -webkit-filter: hue-rotate(79deg);
+  filter: hue-rotate(79deg);
+}
