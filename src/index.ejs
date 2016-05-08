@@ -59,15 +59,16 @@
       <li><a href="#/accelerometer" class="btn btn-primary" title="Test the accelerometer with rxjs">Accelerometer based screen painting</a></li>
     </ul>
     <p>No framework is involved, I made a <a href="#/router">micro-router</a> for the routing, based on <code>history</code>.</p>
+    <p>If you like this project, take a look at <a href="https://topheman.github.io/angular2-sandbox/" title="topheman/angular2-sandbox">topheman/angular2-sandbox</a>, a mix of Angular2, RxJS and ngrx/store.</p>
     <% if (htmlWebpackPlugin.options.DEVTOOLS !== null) { %>
     <!-- This part will appear if you set DEVTOOLS=true or DEVTOOLS=false when launching an npm task -->
     <% if (!htmlWebpackPlugin.options.DEVTOOLS) { %>
-    <p class="crop">
+    <p class="crop" style="margin-top: 30px">
       This is the <strong>production version</strong>. If you want to play with the ES6+ original source code:
     </p>
     <p class="text-center"><strong><a href="./devtools/" title="Test the version with sourcemaps!">I'm a developer, I want to see what's under the hood!</a></strong></p>
     <% } else { %>
-    <p class="crop">This is the <strong>Developer version</strong>, containing sourcemaps. <strong>Open your devtools and read/set breakpoints on the original source code!</strong></p>
+    <p class="crop" style="margin-top: 30px">This is the <strong>Developer version</strong>, containing sourcemaps. <strong>Open your devtools and read/set breakpoints on the original source code!</strong></p>
     <p><a href="../" title="Back to the production version">Back to the production version</a></p>
     <% } %>
     <% } %>

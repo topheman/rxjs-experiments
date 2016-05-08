@@ -25,6 +25,7 @@ For the purpose fo this project, I developed the following:
 Resources:
 
 * [Read the blog post about this project](http://dev.topheman.com/rxjs-first-steps/)
+* Checkout [topheman/angular2-sandbox](https://github.com/topheman/angular2-sandbox), a mix of Angular2, **RxJS** and **ngrx/store**
 
 ##Dev Workflow
 
