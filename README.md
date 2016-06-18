@@ -3,7 +3,7 @@ RxJS Experiments
 
 [![Build Status](https://travis-ci.org/topheman/rxjs-experiments.svg?branch=master)](https://travis-ci.org/topheman/rxjs-experiments)
 
-The motivation of this project is to try out [RxJS](https://github.com/Reactive-Extensions/RxJS), without relying on any framework (CycleJS, ReactJS or AngularJS 2), not to experience the library in a specific context.
+The motivation of this project is to try out [RxJS](https://github.com/ReactiveX/rxjs), without relying on any framework (CycleJS, ReactJS or AngularJS 2), not to experience the library in a specific context.
 
 So far, I implemented the following features:
 
@@ -26,6 +26,7 @@ Resources:
 
 * [Read the blog post about this project](http://dev.topheman.com/rxjs-first-steps/)
 * Checkout [topheman/angular2-sandbox](https://github.com/topheman/angular2-sandbox), a mix of Angular2, **RxJS** and **ngrx/store**
+* It uses the [CommonJS version of RxJS 5 (beta)](https://github.com/ReactiveX/rxjs#commonjs-via-npm)
 
 ##Dev Workflow
 

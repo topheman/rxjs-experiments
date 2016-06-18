@@ -1,4 +1,13 @@
-import { Observable } from 'rxjs/Rx';// @todo check how to import it
+// for the moment, importing whole RxJS, because silently breaks on .flatMap() with observables made with .fromEvent() using touch events
+import { Observable } from 'rxjs/Rx'; // import entire RxJS :(
+
+// That way, we only pick what we need (and end up with a MUCH lighter build!)
+// BUT for the moment, there seem to be a bug with fromEvent() and touchevents ...
+// import { Observable } from 'rxjs/Observable';// doesn't work well with flatMap on fromEvent
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/observable/fromEvent';
+// import 'rxjs/add/operator/mergeMap'; // flatMap is an alias of mergeMap
+// import 'rxjs/add/operator/takeUntil';
 
 const toColor = (num) => parseInt(num * 255, 10);
 
