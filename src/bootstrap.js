@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-require('offline-plugin/runtime').install();
 
 import './scripts/libs/requestAnimationFrame.polyfill';
 import modal from './scripts/components/modal/modal';

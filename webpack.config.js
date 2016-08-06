@@ -8,7 +8,7 @@ log.level = 'silly';
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
+const AppCachePlugin = require('appcache-webpack-plugin');
 const myLocalIp = require('my-local-ip');
 const common = require('./common');
 const projectInfos = common.getInfos();
@@ -74,11 +74,13 @@ if(!FAIL_ON_ERROR) {
   plugins.push(new webpack.NoErrorsPlugin());
 }
 
-plugins.push(new OfflinePlugin({
-  version: SW_VERSION,
-  ServiceWorker: {
-    entry: './src/sw-entry.js'
-  }
+plugins.push(new AppCachePlugin({
+  network: [
+    '*'
+  ],
+  exclude: [/.*\.map$/],
+  fallback: ['/ offline.html'],
+  output: 'manifest.appcache'
 }));
 const htmlPluginConfig = {
   title: 'Topheman - RxJS Experiments',
@@ -101,6 +103,14 @@ plugins.push(new HtmlWebpackPlugin(Object.assign(
   {}, htmlPluginConfig, {
     MODE: 'offline',
     filename: 'offline.html'
+  }
+)));
+// generate iframe-inject-appcache-manifest.html - injected via iframe in index.html
+// (so that it won't be cached by appcache - otherwise, referencing manifest directly would automatically cache it)
+plugins.push(new HtmlWebpackPlugin(Object.assign(
+  {}, htmlPluginConfig, {
+    template: 'src/iframe-inject-appcache-manifest.ejs',
+    filename: 'iframe-inject-appcache-manifest.html'
   }
 )));
 
