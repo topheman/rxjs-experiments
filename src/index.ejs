@@ -6,7 +6,7 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
 <% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><link href="<%= webpack.assetsByChunkName['main'][1] %>" rel="stylesheet"><% } %></head>
 </head>
-<body>
+<body class="<%= htmlWebpackPlugin.options.MODE %>">
 <div id="header">
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -41,6 +41,8 @@
     </div>
   </nav>
 
+  <% if (htmlWebpackPlugin.options.MODE === 'offline') { %><span class="glyphicon glyphicon-plane" aria-hidden="true" title="offline mode"></span><% } %>
+
   <ul class="site-networks">
     <li class="twitter">
       <a href="https://twitter.com/topheman" title="@topheman on twitter">
@@ -67,6 +69,11 @@
       </ul>
       <p>Please checkout <a href="https://youtu.be/IWgNn1kqrsA?list=PLOU2XLYxmsILKwwASNS0xgfcmakbK_8JZ" title="Progressive Web App DevTools , Totally Tooling Tips (S3 Mini Tip)" style="font-weight: bold;">this video</a>, a great resource on how to develop with service workers / appcache ...</p>
       <p>If you want to run the app without the warnings, just use the <code>STRICT</code> flag, by running <code>STRICT=false npm start</code> for example.</p>
+    </div>
+    <% } %>
+    <% if (htmlWebpackPlugin.options.MODE === 'offline') { %>
+    <div class="alert alert-info" style="margin-top: 20px;">
+      <p>You're running the offline version of this site - check the <span class="glyphicon glyphicon-plane" aria-hidden="true" title="offline mode"></span> icon in the header.</p>
     </div>
     <% } %>
     <img id="qr-code" src="<%= require('./assets/images/qr-code.png') %>"/>

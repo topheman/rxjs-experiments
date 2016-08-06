@@ -98,6 +98,22 @@ and (max-width : 370px) {
   background-color: #900000;
 }
 
+/** offline logo */
+#header .glyphicon.glyphicon-plane {
+  z-index: $zindex-navbar-fixed + 1;
+  position:absolute;
+  right:200px;
+  top:13px;
+  font-size: 24px;
+}
+/** for small devices */
+@media only screen
+and (max-width : 370px) {
+  #header .glyphicon.glyphicon-plane {
+    right:70px;
+  }
+}
+
 /** logo on the left */
 .navbar-brand.logo {
   padding-left: 50px;

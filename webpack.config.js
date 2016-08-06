@@ -80,7 +80,7 @@ plugins.push(new OfflinePlugin({
     entry: './src/sw-entry.js'
   }
 }));
-plugins.push(new HtmlWebpackPlugin({
+const htmlPluginConfig = {
   title: 'Topheman - RxJS Experiments',
   template: 'src/index.ejs', // Load a custom template
   inject: MODE_DEV_SERVER, // inject scripts in dev-server mode - in build mode, use the template tags
@@ -89,7 +89,21 @@ plugins.push(new HtmlWebpackPlugin({
   BANNER_HTML: BANNER_HTML,
   STRICT: STRICT,
   SW_VERSION: SW_VERSION
-}));
+};
+// generate index.html
+plugins.push(new HtmlWebpackPlugin(Object.assign(
+  {}, htmlPluginConfig, {
+    MODE: 'online'
+  }
+)));
+// generate offline.html
+plugins.push(new HtmlWebpackPlugin(Object.assign(
+  {}, htmlPluginConfig, {
+    MODE: 'offline',
+    filename: 'offline.html'
+  }
+)));
+
 // extract css into one main.css file
 plugins.push(new ExtractTextPlugin(`main${hash}.css`, {
   disable: false,
