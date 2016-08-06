@@ -8,8 +8,10 @@ log.level = 'silly';
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 const myLocalIp = require('my-local-ip');
 const common = require('./common');
+const projectInfos = common.getInfos();
 const plugins = [];
 
 const BANNER = common.getBanner();
@@ -27,6 +29,7 @@ const BUILD_DIR = './build';
 const DIST_DIR = process.env.DIST_DIR || 'dist';// relative to BUILD_DIR
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV.toLowerCase() : 'development';
 const DEVTOOLS = process.env.DEVTOOLS ? JSON.parse(process.env.DEVTOOLS) : null;// can be useful in case you have web devtools (null by default to differentiate from true or false)
+const STRICT = process.env.STRICT ? JSON.parse(process.env.STRICT) : true;
 // optimize in production by default - otherwize, override with OPTIMIZE=false flag (if not optimized, sourcemaps will be generated)
 const OPTIMIZE = process.env.OPTIMIZE ? JSON.parse(process.env.OPTIMIZE) : NODE_ENV === 'production';
 const LINTER = process.env.LINTER ? JSON.parse(process.env.LINTER) : true;
@@ -58,21 +61,34 @@ if (FAIL_ON_ERROR) {
 if (OPTIMIZE) {
   log.info('webpack', 'OPTIMIZE: code will be compressed and deduped');
 }
+log.info('webpack', 'STRICT mode ' + (STRICT ? 'enabled' : 'disabled'));
 log.info('webpack', 'SENSORS_CHECKER ' + (SENSORS_CHECKER ? 'enabled' : 'disabled'));
 
 /** plugins setup */
+
+// in development, the sw version is the current timestamp (makes sure to get a different sw each time you launch webpack dev server)
+// in production, the sw version is base on your package.json version and git hash (if available) - different at each release
+const SW_VERSION = NODE_ENV === 'development' ? (new Date()).getTime() : (projectInfos.gitRevisionShort ? (`${projectInfos.pkg.version}-${projectInfos.gitRevisionShort}`) : projectInfos.pkg.version);
 
 if(!FAIL_ON_ERROR) {
   plugins.push(new webpack.NoErrorsPlugin());
 }
 
+plugins.push(new OfflinePlugin({
+  version: SW_VERSION,
+  ServiceWorker: {
+    entry: './src/sw-entry.js'
+  }
+}));
 plugins.push(new HtmlWebpackPlugin({
   title: 'Topheman - RxJS Experiments',
   template: 'src/index.ejs', // Load a custom template
   inject: MODE_DEV_SERVER, // inject scripts in dev-server mode - in build mode, use the template tags
   MODE_DEV_SERVER: MODE_DEV_SERVER,
   DEVTOOLS: DEVTOOLS,
-  BANNER_HTML: BANNER_HTML
+  BANNER_HTML: BANNER_HTML,
+  STRICT: STRICT,
+  SW_VERSION: SW_VERSION
 }));
 // extract css into one main.css file
 plugins.push(new ExtractTextPlugin(`main${hash}.css`, {
@@ -88,7 +104,10 @@ plugins.push(new webpack.DefinePlugin({
     'NODE_ENV': JSON.stringify(NODE_ENV),
     'DEVTOOLS': DEVTOOLS, // You can rely on this var in your code to enable specific features only related to development (that are not related to NODE_ENV)
     'LINTER': LINTER, // You can choose to log a warning in dev if the linter is disabled
-    'SENSORS_CHECKER': SENSORS_CHECKER
+    'SENSORS_CHECKER': SENSORS_CHECKER,
+    'MODE_DEV_SERVER': MODE_DEV_SERVER,
+    'STRICT': STRICT,
+    'SW_VERSION': SW_VERSION
   }
 }));
 

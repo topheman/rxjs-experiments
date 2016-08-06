@@ -22,19 +22,19 @@
 
 // Components
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
-//@import "~bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/navs";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/navbar";
-//@import "~bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/pagination";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/pager";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/labels";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/badges";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/jumbotron";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/thumbnails";
-//@import "~bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/alerts";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/progress-bars";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/media";
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap/list-group";
@@ -56,7 +56,7 @@
 @import "header.scss";
 @import "footer.scss";
 
-#home-container,
+#generic-container,
 #app-container {
   margin-top: $navbar-height;
 }

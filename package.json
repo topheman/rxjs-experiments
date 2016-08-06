@@ -64,6 +64,7 @@
     "my-local-ip": "^1.0.0",
     "node-sass": "^3.4.2",
     "npmlog": "^2.0.2",
+    "offline-plugin": "^3.4.2",
     "pre-commit": "^1.1.2",
     "sass-loader": "^3.1.2",
     "serve": "^1.4.0",

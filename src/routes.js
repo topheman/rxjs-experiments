@@ -4,6 +4,7 @@ import homeHandler from './scripts/containers/home/home';
 import routerHandler from './scripts/containers/router/router';
 import accelerometerHandler from './scripts/containers/accelerometer/accelerometer';
 import dragHandler from './scripts/containers/drag/drag';
+import progressiveHandler from './scripts/containers/progressive/progressive';
 
 const generateHandler = (name, handler) => ({ location, params, history }) => {
   console.log(`Mounting ${name}`, location, params, history);
@@ -30,6 +31,7 @@ const routes = [
   { pattern: '/router/resolve', handler: generateHandler('/router/resolve'), resolve: generatePromiseTimeout('/router/resolve') },
   { pattern: '/accelerometer', handler: accelerometerHandler, resolve: resolveDeviceOrientation() },
   { pattern: '/multitouch-mouse-drag', handler: dragHandler, resolve: resolveDeviceOrientation() },
+  { pattern: '/progressive', handler: progressiveHandler },
   { pattern: '*', handler: generateHandler('CAPTURE ALL', homeHandler) }
 ];
 

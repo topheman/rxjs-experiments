@@ -25,6 +25,16 @@
           <li><a href="#/multitouch-mouse-drag">Multitouch/Mouse drag</a></li>
           <li><a href="#/accelerometer">Accelerometer</a></li>
           <li><a href="#/router">micro-router</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Progressive <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#/progressive">Overview</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#/progressive/cache">Cache Management</a></li>
+              <li><a href="#/progressive/notifications">Notifications</a></li>
+              <li><a href="#/progressive/homescreen">Home Screen</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
 
@@ -46,10 +56,22 @@
     </li>
   </ul>
 </div>
-<div id="home-container" style="display: none;">
-  <div class="container">
+<div id="generic-container" style="display: none;">
+  <div id="home-content" class="container" style="display: none;">
+    <% if (htmlWebpackPlugin.options.MODE_DEV_SERVER === true && htmlWebpackPlugin.options.STRICT === true) { %>
+    <div class="alert alert-warning" style="margin-top: 20px;">
+      <p><strong>Warning:</strong> This site is using a service worker, so you'll have to shortcut it to take advantage of the live-reload. In your developer tools:</p>
+      <ul>
+        <li>Go to Application/Service Workers</li>
+        <li>Check "Update on reload"</li>
+      </ul>
+      <p>Please checkout <a href="https://youtu.be/IWgNn1kqrsA?list=PLOU2XLYxmsILKwwASNS0xgfcmakbK_8JZ" title="Progressive Web App DevTools , Totally Tooling Tips (S3 Mini Tip)" style="font-weight: bold;">this video</a>, a great resource on how to develop with service workers / appcache ...</p>
+      <p>If you want to run the app without the warnings, just use the <code>STRICT</code> flag, by running <code>STRICT=false npm start</code> for example.</p>
+    </div>
+    <% } %>
     <img id="qr-code" src="<%= require('./assets/images/qr-code.png') %>"/>
-    <p style="margin-top: 20px;">
+    <p style="margin-top: 20px;" class="lead"><i>Latest update</i>: added <strong>offline</strong> support and <strong>progressive app features</strong> - <a href="#/progressive" title="Progressive app features" style="font-weight: bold;">check it out!</a></p>
+    <p>
       <a href="https://github.com/Reactive-Extensions/RxJS">RxJS</a> is a set of libraries that lets you do <strong>reactive programming</strong> (it exists in many other languages aside of JavaScript). I wanted to try it out (I've been doing a lot of functional programming lately, both share a lot of similar concepts).
     </p>
     <p>RxJS is really good to simplify the management of events with intermediate state (such as drag'n drop).</p>
@@ -73,14 +95,16 @@
     <% } %>
     <% } %>
   </div>
+  <div id="other-content"></div><!-- dynamic text markup will go in there (to keep layout) -->
   <footer class="container">
     <p><span id="copyright-year">©<%= (new Date()).getFullYear() %></span> <a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset</p>
+    <p id="footer-cache-infos" style="display: none">Service worker version: <%= htmlWebpackPlugin.options.SW_VERSION %></p>
     <p>
       <iframe width="78px" height="28px" title="Twitter Tweet Button" style="border:0;overflow:hidden;" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?count=none&amp;dnt=false&amp;lang=en&amp;original_referer=http%3A%2F%2Ftopheman.github.io%2Frxjs-experiments%2F&amp;size=l&amp;text=%23RxJS%20experiments%20%23Webpack%20%23Babel&amp;type=share&amp;url=https%3A%2F%2Fgithub.com%2Ftopheman%2Frxjs-experiments%2F&amp;via=topheman" data-reactid=".0.2.0.6"></iframe>
     </p>
   </footer>
 </div>
-<div id="app-container"></div>
+<div id="app-container"></div><!-- dynamic app markup will go in there (no need for footer) -->
 <!-- keep the following lines -->
 <% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><script src="<%= Object.prototype.toString.call(webpack.assetsByChunkName['bundle']) === '[object Array]' ? webpack.assetsByChunkName['bundle'][0] : webpack.assetsByChunkName['bundle'] %>"><% } %></script>
 <!-- Google Analytics -->

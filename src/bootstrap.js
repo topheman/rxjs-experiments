@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+require('offline-plugin/runtime').install();
+
 import './scripts/libs/requestAnimationFrame.polyfill';
 import modal from './scripts/components/modal/modal';
 import { router, hashHistory } from './scripts/libs/micro-router';
@@ -42,6 +44,18 @@ const main = () => {
   document.querySelector('button.navbar-toggle').addEventListener('click', () => {
     document.querySelector('.collapse.navbar-collapse').classList.toggle('in');
   });
+  document.querySelector('.dropdown').addEventListener('click', () => {
+    document.querySelector('.dropdown').classList.toggle('open');
+  }, false);
+  window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('dropdown') || e.target.classList.contains('dropdown-toggle')) {
+      return false;
+    }
+    document.querySelector('.dropdown').classList.remove('open');
+  }, false);
+  document.getElementById('copyright-year').addEventListener('click', () => {
+    document.getElementById('footer-cache-infos').style.display = 'block';
+  }, false);
   modal();
 };
 
