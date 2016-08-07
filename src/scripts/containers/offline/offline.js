@@ -13,6 +13,23 @@ const mount = () => {
   document.getElementById('generic-container').style.display = 'block';
   document.getElementById('other-content').style.display = 'block';
 
+  // prepare handlers
+  Array.from(document.querySelectorAll('.show-manifest-appcache'))
+    .forEach(elm => elm.addEventListener('click', (e) => {
+      e.preventDefault();
+      const placeHolder = document.getElementById('placeholder-manifest-appcache');
+      fetch('./manifest.appcache')
+        .then(res => res.text())
+        .then(text => {
+          placeHolder.innerHTML = text;
+          placeHolder.style.display = 'block';
+        })
+        .catch(() => {
+          placeHolder.innerHTML = 'An error occured retrieving the manifest.appcache, please retry.';
+          placeHolder.style.display = 'block';
+        });
+    }, false));
+
   const unMount = () => {
     document.getElementById('generic-container').style.display = 'none';
     document.getElementById('other-content').style.display = 'none';

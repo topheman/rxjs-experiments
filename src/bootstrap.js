@@ -1,5 +1,9 @@
 /* eslint-disable max-len */
 
+// polyfills
+require('es6-promise').polyfill();
+require('fetch-polyfill');
+
 import './scripts/libs/requestAnimationFrame.polyfill';
 import modal, { show as showModal } from './scripts/components/modal/modal';
 import { router, hashHistory } from './scripts/libs/micro-router';

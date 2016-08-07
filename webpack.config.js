@@ -69,7 +69,7 @@ log.info('webpack', 'SENSORS_CHECKER ' + (SENSORS_CHECKER ? 'enabled' : 'disable
 
 // in development, the sw version is the current timestamp (makes sure to get a different sw each time you launch webpack dev server)
 // in production, the sw version is base on your package.json version and git hash (if available) - different at each release
-const SW_VERSION = NODE_ENV === 'development' ? (new Date()).getTime() : (projectInfos.gitRevisionShort ? (`${projectInfos.pkg.version}-${projectInfos.gitRevisionShort}`) : projectInfos.pkg.version);
+const SW_VERSION = NODE_ENV === 'development' ? `v${(new Date()).getTime()}` : (projectInfos.gitRevisionShort ? (`v${projectInfos.pkg.version}-${projectInfos.gitRevisionShort}`) : `v${projectInfos.pkg.version}`);
 
 if(!FAIL_ON_ERROR) {
   plugins.push(new webpack.NoErrorsPlugin());
@@ -93,8 +93,11 @@ const appCacheConfig = {
 if (APPCACHE) {
   // regular appcache manifest
   plugins.push(new AppCachePlugin(Object.assign({}, appCacheConfig, {
-    exclude: [/.*\.map$/],
-    fallback: ['/ offline.html']
+    exclude: [
+      /.*\.map$/,
+      /^main(.*)\.js$/ // this is the js file emitted from webpack for main.css (since it's used in plain css, no need for it)
+    ],
+    fallback: ['. offline.html']
   })));
 }
 else {
@@ -165,7 +168,7 @@ plugins.push(new webpack.DefinePlugin({
     'SENSORS_CHECKER': SENSORS_CHECKER,
     'MODE_DEV_SERVER': MODE_DEV_SERVER,
     'STRICT': STRICT,
-    'SW_VERSION': SW_VERSION
+    'SW_VERSION': JSON.stringify(SW_VERSION)
   }
 }));
 
