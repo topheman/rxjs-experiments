@@ -3,6 +3,18 @@ RxJS Experiments
 
 [![Build Status](https://travis-ci.org/topheman/rxjs-experiments.svg?branch=master)](https://travis-ci.org/topheman/rxjs-experiments)
 
+New features comming, "progressive app" related - roadmap:
+
+- [x] Offline support via AppCache
+- [ ] Offline support via Service Workers
+- [ ] Notifications
+- [ ] Add to homescreen
+- [ ] ?...
+
+All of those being integrated inside the webpack workflow (both at dev & build time). Check the [WIKI](https://github.com/topheman/rxjs-experiments/wiki) for more infos about how I managed this part of the app.
+
+##Introduction
+
 The motivation of this project is to try out [RxJS](https://github.com/ReactiveX/rxjs), without relying on any framework (CycleJS, ReactJS or AngularJS 2), not to experience the library in a specific context.
 
 So far, I implemented the following features:
@@ -11,6 +23,8 @@ So far, I implemented the following features:
 * **Accelerometer** based background color (fallback on mouse position if no accelerometer)
 
 Works on both desktop/mobile, but you'll enjoy it more on your tablet/phone (with touch and accelerometer).
+
+
 
 [![image](https://raw.githubusercontent.com/topheman/rxjs-experiments/master/src/assets/images/qr-code.png)](https://topheman.github.io/rxjs-experiments/)
 
@@ -88,6 +102,7 @@ You can customize the behavior of the scripts by specifying environments vars:
 * `FAIL_ON_ERROR=true` will break the build if any errors occurs (useful for CIs such ase Travis - at `false` in dev-server, at `true` when building)
 * `LOCALHOST=false` to access via IP from other devices on the same network (ex: `LOCALHOST=false npm start` - default `true`)
 * `DEVTOOLS`: By default at `null`. Used internally in `npm run build-prod-all` (you may not need that if you don't do OSS)
+* `APPCACHE`: You can use `APPCACHE=false` with a build task to generate an `appcache.manifest` that wont contain anything to cache (usefull if you want to reset cache on testing devices)
 
 ###FAQ / Deploy
 
