@@ -63,6 +63,7 @@ if (OPTIMIZE) {
 }
 log.info('webpack', 'STRICT mode ' + (STRICT ? 'enabled' : 'disabled'));
 log.info('webpack', 'SENSORS_CHECKER ' + (SENSORS_CHECKER ? 'enabled' : 'disabled'));
+log.info('webpack', `AppCache doesn't cache any resources in development mode`);
 
 /** plugins setup */
 
@@ -74,14 +75,27 @@ if(!FAIL_ON_ERROR) {
   plugins.push(new webpack.NoErrorsPlugin());
 }
 
-plugins.push(new AppCachePlugin({
+const appCacheConfig = {
   network: [
     '*'
   ],
-  exclude: [/.*\.map$/],
-  fallback: ['/ offline.html'],
   output: 'manifest.appcache'
-}));
+};
+
+if (!MODE_DEV_SERVER) {
+  // regular appcache manifest
+  plugins.push(new AppCachePlugin(Object.assign({}, appCacheConfig, {
+    exclude: [/.*\.map$/],
+    fallback: ['/ offline.html']
+  })));
+}
+else {
+  // appcache manifest that wont cache anything (to be used in development)
+  plugins.push(new AppCachePlugin(Object.assign({}, appCacheConfig, {
+    exclude: [/.*$/]
+  })));
+}
+
 const htmlPluginConfig = {
   title: 'Topheman - RxJS Experiments',
   template: 'src/index.ejs', // Load a custom template

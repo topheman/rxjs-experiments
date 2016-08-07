@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"<% if (htmlWebpackPlugin.options.MODE_DEV_SERVER) { /** only in devserver, so that there wont be any manifest referenced */ %> manifest="none"<% } %>>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
