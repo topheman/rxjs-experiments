@@ -40,6 +40,7 @@ const ASSETS_LIMIT = typeof process.env.ASSETS_LIMIT !== 'undefined' ? parseInt(
 const hash = (NODE_ENV === 'production' && DEVTOOLS ? '-devtools' : '') + (NODE_ENV === 'production' ? '-[hash]' : '');
 
 const SENSORS_CHECKER = process.env.SENSORS_CHECKER ? JSON.parse(process.env.SENSORS_CHECKER) : true;// if false, will disable the lookup for an accelerometer (that way you can use it when debugging on desktop)
+const APPCACHE = process.env.APPCACHE ? JSON.parse(process.env.APPCACHE) : !MODE_DEV_SERVER;// if false, nothing will be cached by AppCache
 
 /** integrity checks */
 
@@ -63,7 +64,6 @@ if (OPTIMIZE) {
 }
 log.info('webpack', 'STRICT mode ' + (STRICT ? 'enabled' : 'disabled'));
 log.info('webpack', 'SENSORS_CHECKER ' + (SENSORS_CHECKER ? 'enabled' : 'disabled'));
-log.info('webpack', `AppCache doesn't cache any resources in development mode`);
 
 /** plugins setup */
 
@@ -75,14 +75,22 @@ if(!FAIL_ON_ERROR) {
   plugins.push(new webpack.NoErrorsPlugin());
 }
 
+/**
+ * AppCache setup - generates a manifest.appcache file based on config
+ * that will be referenced in the iframe-inject-appcache-manifest.html file
+ * which will itself be in an <iframe> tag in the index.html file
+ *
+ * Reason: So that index.html wont be cached
+ * (if it were the one referencing manifest.appcache, it would be cached, and we couldn't manage FALLBACK correctly)
+ * TLDR: AppCache sucks, but it's the only offline cross-browser "API"
+ */
 const appCacheConfig = {
   network: [
     '*'
   ],
   output: 'manifest.appcache'
 };
-
-if (!MODE_DEV_SERVER) {
+if (APPCACHE) {
   // regular appcache manifest
   plugins.push(new AppCachePlugin(Object.assign({}, appCacheConfig, {
     exclude: [/.*\.map$/],
@@ -94,8 +102,20 @@ else {
   plugins.push(new AppCachePlugin(Object.assign({}, appCacheConfig, {
     exclude: [/.*$/]
   })));
+  if (MODE_DEV_SERVER) {
+    log.info('webpack', `[AppCache] No resources added to cache in development mode`);
+  }
+  else {
+    log.info('webpack', `[AppCache] Cache resetted - nothing will be cached by AppCache`);
+  }
 }
 
+/**
+ * HtmlPluginConfig: This will generate a bunch of html files:
+ * - index.html (entry point)
+ * - offline.html (appcache offline fallback entry point)
+ * - iframe-inject-appcache-manifest.html (html file injected in index.html)
+ */
 const htmlPluginConfig = {
   title: 'Topheman - RxJS Experiments',
   template: 'src/index.ejs', // Load a custom template
