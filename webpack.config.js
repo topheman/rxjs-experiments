@@ -88,6 +88,7 @@ const appCacheConfig = {
   network: [
     '*'
   ],
+  settings: ['prefer-online'],
   output: 'manifest.appcache'
 };
 if (APPCACHE) {
