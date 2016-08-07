@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 
 import './scripts/libs/requestAnimationFrame.polyfill';
-import modal from './scripts/components/modal/modal';
+import modal, { show as showModal } from './scripts/components/modal/modal';
 import { router, hashHistory } from './scripts/libs/micro-router';
 import routes from './routes';
 /** This is how you use the environments variables passed by the webpack.DefinePlugin **/
@@ -49,6 +49,10 @@ const main = () => {
   window.addEventListener('click', (e) => {
     if (e.target.classList.contains('dropdown') || e.target.classList.contains('dropdown-toggle')) {
       return false;
+    }
+    if (e.target.classList.contains('in-progress')) {
+      e.preventDefault();
+      return showModal({ title: 'Comming soon ...', content: 'This is a work in progress.' });
     }
     document.querySelector('.dropdown').classList.remove('open');
   }, false);
