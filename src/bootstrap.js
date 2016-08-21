@@ -44,21 +44,29 @@ if (process.env.DEVTOOLS && process.env.NODE_ENV !== 'production') {
 
 const main = () => {
   console.log('Welcome! More infos at https://github.com/topheman/rxjs-experiments');
+  const navBarCollapse = document.querySelector('.collapse.navbar-collapse');
+  // hide responsive menu when a link is clicked
+  navBarCollapse.addEventListener('click', (e) => {
+    if (navBarCollapse.classList.contains('in') && !e.target.classList.contains('dropdown-toggle')) {
+      navBarCollapse.classList.remove('in');
+    }
+  }, false);
+  // show/hide responsive menu when clicking hamburger button
   document.querySelector('button.navbar-toggle').addEventListener('click', () => {
-    document.querySelector('.collapse.navbar-collapse').classList.toggle('in');
+    navBarCollapse.classList.toggle('in');
   });
-  document.querySelector('.dropdown').addEventListener('click', () => {
+  // show/hide sub-menus
+  document.querySelector('.dropdown-toggle').addEventListener('click', () => {
     document.querySelector('.dropdown').classList.toggle('open');
   }, false);
   window.addEventListener('click', (e) => {
-    if (e.target.classList.contains('dropdown') || e.target.classList.contains('dropdown-toggle')) {
-      return false;
-    }
     if (e.target.classList.contains('in-progress')) {
       e.preventDefault();
       return showModal({ title: 'Comming soon ...', content: 'This is a work in progress.' });
     }
-    document.querySelector('.dropdown').classList.remove('open');
+    if (!e.target.classList.contains('dropdown-toggle')) {
+      document.querySelector('.dropdown').classList.remove('open');
+    }
   }, false);
   document.getElementById('copyright-year').addEventListener('click', () => {
     document.getElementById('footer-cache-infos').style.display = 'block';
