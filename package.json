@@ -70,6 +70,7 @@
     "serve": "^1.4.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
+    "web-app-manifest-loader": "^0.1.1",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },

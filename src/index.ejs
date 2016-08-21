@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="manifest" href="<%= require('./manifest.json') %>">
+  <!-- iPhone 4, iPhone 4s, iPhone 5, iPhone 5c, iPhone 5s, iPhone 6, iPhone 6s -->
+  <link rel="apple-touch-icon" sizes="120x120" href="<%= require('./assets/images/icons/apple-touch-icon-120x120.png') %>">
+  <!-- iPhone 6 Plus and iPhone 6s Plus -->
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= require('./assets/images/icons/apple-touch-icon-180x180.png') %>">
 <% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><link href="<%= webpack.assetsByChunkName['main'][1] %>" rel="stylesheet"><% } %></head>
 </head>
 <body class="<%= htmlWebpackPlugin.options.MODE %>">

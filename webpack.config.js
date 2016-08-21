@@ -252,7 +252,12 @@ const config = {
       },
       {
         test: /\.json$/,
+        exclude: /manifest.json$/,// to avoid to conflict with manifest.json loader
         loader: 'json-loader'
+      },
+      {
+        test: /manifest.json$/,
+        loader: 'file-loader?name=manifest.json!web-app-manifest-loader'
       },
       {
         test: /\.scss$/,
