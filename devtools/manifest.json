@@ -1,0 +1,31 @@
+{
+  "short_name": "RxJS Experiments",
+  "name": "Topheman - RxJS Experiments",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/e9641b075ba14a849b5ba5500b943d7b.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/5baf3575ad4a2925fe1852a677706695.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/19a2ed0744623d88714b63564ac1bc16.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/9b367318866d4f69c51f1c5e6a533029.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#EEEEEE",
+  "theme_color": "#900000",
+  "display": "standalone",
+  "orientation": "portrait"
+}

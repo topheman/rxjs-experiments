@@ -1,6 +1,6 @@
 ##RxJS Experiments - distribution version (gh-pages branch)
 
-This is the distribution version of [topheman/rxjs-experiments](https://github.com/topheman/rxjs-experiments) - v0.4.0 - [#f6d54c7](https://github.com/topheman/rxjs-experiments/tree/f6d54c753b5300ac7967686e0978b284cf908bcc).
+This is the distribution version of [topheman/rxjs-experiments](https://github.com/topheman/rxjs-experiments) - v0.4.0 - [#aeb6cd8](https://github.com/topheman/rxjs-experiments/tree/aeb6cd8fb0cc0d012ce7310e46fe5a74bf9c557c).
 
 **Warning**: This is the **generated** code, versionned on the `gh-pages` branch, testable online [here](https://topheman.github.io/rxjs-experiments/). If you wish to see the original source code, switch to the [master branch](https://github.com/topheman/rxjs-experiments).
 
