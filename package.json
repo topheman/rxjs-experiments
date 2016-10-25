@@ -81,7 +81,7 @@
     "fetch-polyfill": "^0.8.2",
     "history": "^2.0.1",
     "invariant": "^2.2.1",
-    "rxjs": "^5.0.0-beta.9",
+    "rxjs": "^5.0.0-rc.1",
     "sensors-checker": "^1.0.0"
   }
 }
