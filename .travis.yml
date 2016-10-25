@@ -8,7 +8,6 @@ before_install:
 install:
   - time yarn
 before_script:
-  - npm ls --depth=0
   - npm run build
   - npm run build-prod-all
 script:
