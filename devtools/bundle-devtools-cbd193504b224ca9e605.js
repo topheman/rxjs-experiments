@@ -3,8 +3,8 @@
  * 
  * Playing with RxJS
  * 
- * @version v0.4.0 - 25/10/2016
- * @revision #6a98cab - https://github.com/topheman/rxjs-experiments/tree/6a98cab3a9dc39a2ded7b6464e80bca51d0d1274
+ * @version v0.5.0 - 26/10/2016
+ * @revision #27155bc - https://github.com/topheman/rxjs-experiments/tree/27155bcc9dc6529d81f667bab2550052c3557fe4
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @copyright 2016(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT
@@ -342,7 +342,7 @@
 	var debugEnviron;
 	exports.debuglog = function(set) {
 	  if (isUndefined(debugEnviron))
-	    debugEnviron = ({"NODE_ENV":"production","DEVTOOLS":true,"LINTER":true,"SENSORS_CHECKER":true,"MODE_DEV_SERVER":false,"STRICT":true,"SW_VERSION":"v0.4.0-6a98cab"}).NODE_DEBUG || '';
+	    debugEnviron = ({"NODE_ENV":"production","DEVTOOLS":true,"LINTER":true,"SENSORS_CHECKER":true,"MODE_DEV_SERVER":false,"STRICT":true,"SW_VERSION":"v0.5.0-27155bc"}).NODE_DEBUG || '';
 	  set = set.toUpperCase();
 	  if (!debugs[set]) {
 	    if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -23593,4 +23593,4 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=bundle-devtools-1bf11a0011ab107aac85.js.map
+//# sourceMappingURL=bundle-devtools-cbd193504b224ca9e605.js.map
