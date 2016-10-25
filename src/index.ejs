@@ -107,7 +107,7 @@
   </div>
   <div id="other-content"></div><!-- dynamic text markup will go in there (to keep layout) -->
   <footer class="container">
-    <p><span id="copyright-year">©<%= (new Date()).getFullYear() %></span> <a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset</p>
+    <p><span id="copyright-year">©<%= (new Date()).getFullYear() %></span> <a href="http://labs.topheman.com/" title="My Projects">labs.topheman.com</a> - Christophe Rosset<%= htmlWebpackPlugin.options.VERSION ? (' - v' + htmlWebpackPlugin.options.VERSION) : '' %></p>
     <p id="footer-cache-infos" style="display: none">Service worker version: <%= htmlWebpackPlugin.options.SW_VERSION %></p>
     <% if (htmlWebpackPlugin.options.MODE === 'online') { %>
     <p>

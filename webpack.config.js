@@ -128,7 +128,8 @@ const htmlPluginConfig = {
   DEVTOOLS: DEVTOOLS,
   BANNER_HTML: BANNER_HTML,
   STRICT: STRICT,
-  SW_VERSION: SW_VERSION
+  SW_VERSION: SW_VERSION,
+  VERSION: projectInfos.pkg ? projectInfos.pkg.version : ''
 };
 // generate index.html
 plugins.push(new HtmlWebpackPlugin(Object.assign(
