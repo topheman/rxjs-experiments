@@ -56,17 +56,17 @@ const main = () => {
     navBarCollapse.classList.toggle('in');
   });
   // show/hide sub-menus
-  document.querySelector('.dropdown-toggle').addEventListener('click', () => {
-    document.querySelector('.dropdown').classList.toggle('open');
-  }, false);
+  // document.querySelector('.dropdown-toggle').addEventListener('click', () => {
+  //   document.querySelector('.dropdown').classList.toggle('open');
+  // }, false);
   window.addEventListener('click', (e) => {
     if (e.target.classList.contains('in-progress')) {
       e.preventDefault();
       return showModal({ title: 'Comming soon ...', content: 'This is a work in progress.' });
     }
-    if (!e.target.classList.contains('dropdown-toggle')) {
-      document.querySelector('.dropdown').classList.remove('open');
-    }
+    // if (!e.target.classList.contains('dropdown-toggle')) {
+    //   document.querySelector('.dropdown').classList.remove('open');
+    // }
   }, false);
   document.getElementById('copyright-year').addEventListener('click', () => {
     document.getElementById('footer-cache-infos').style.display = 'block';

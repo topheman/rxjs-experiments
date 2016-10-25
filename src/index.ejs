@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" sizes="120x120" href="<%= require('./assets/images/icons/apple-touch-icon-120x120.png') %>">
   <!-- iPhone 6 Plus and iPhone 6s Plus -->
   <link rel="apple-touch-icon" sizes="180x180" href="<%= require('./assets/images/icons/apple-touch-icon-180x180.png') %>">
-<% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><link href="<%= webpack.assetsByChunkName['main'][1] %>" rel="stylesheet"><% } %></head>
+  <% if (!htmlWebpackPlugin.options.MODE_DEV_SERVER) { %><link href="<%= webpack.assetsByChunkName['main'][1] %>" rel="stylesheet"><% } %>
 </head>
 <body class="<%= htmlWebpackPlugin.options.MODE %>">
 <div id="header">
@@ -30,14 +30,7 @@
           <li><a href="#/multitouch-mouse-drag">Multitouch/Mouse drag</a></li>
           <li><a href="#/accelerometer">Accelerometer</a></li>
           <li><a href="#/router">micro-router</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Progressive <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#/progressive">Overview</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#/progressive/offline">Offline Support</a></li>
-            </ul>
-          </li>
+          <li><a href="#/progressive">Progressive</a></li>
         </ul>
       </div>
 
