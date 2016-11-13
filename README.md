@@ -5,7 +5,7 @@ RxJS Experiments
 
 New features comming, "progressive app" related - roadmap:
 
-- [x] Offline support via AppCache
+- [x] Offline support via AppCache - [READ BLOG POST](http://dev.topheman.com/automate-appcache-offline-support-in-your-webpack-build/)
 - [ ] Offline support via Service Workers
 - [ ] Notifications
 - [ ] Add to homescreen ([webapp manifest ready](https://github.com/topheman/rxjs-experiments/commit/a6d137d34f6003e1baac5e0d4e5b10bb8455e943) - but not service worker engagement yet)
