@@ -3,8 +3,8 @@
  * 
  * Playing with RxJS
  * 
- * @version v0.5.0 - 26/10/2016
- * @revision #27155bc - https://github.com/topheman/rxjs-experiments/tree/27155bcc9dc6529d81f667bab2550052c3557fe4
+ * @version v0.5.0 - 13/11/2016
+ * @revision #5d756ae - https://github.com/topheman/rxjs-experiments/tree/5d756ae9bc717cb5742e19a8f0c21a63313da129
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @copyright 2016(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT
@@ -342,7 +342,7 @@
 	var debugEnviron;
 	exports.debuglog = function(set) {
 	  if (isUndefined(debugEnviron))
-	    debugEnviron = ({"NODE_ENV":"production","DEVTOOLS":true,"LINTER":true,"SENSORS_CHECKER":true,"MODE_DEV_SERVER":false,"STRICT":true,"SW_VERSION":"v0.5.0-27155bc"}).NODE_DEBUG || '';
+	    debugEnviron = ({"NODE_ENV":"production","DEVTOOLS":true,"LINTER":true,"SENSORS_CHECKER":true,"MODE_DEV_SERVER":false,"STRICT":true,"SW_VERSION":"v0.5.0-5d756ae"}).NODE_DEBUG || '';
 	  set = set.toUpperCase();
 	  if (!debugs[set]) {
 	    if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -22060,7 +22060,7 @@
 /* 397 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container page-progressive-offline\">\n  <ol class=\"breadcrumb\" style=\"margin-top: 20px;\">\n    <li><a href=\"#/progressive\">Progressive</a></li>\n    <li class=\"active\">Offline</li>\n  </ol>\n  <h3>AppCache</h3>\n  <p><a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache\" title=\"AppCache on MDN\">AppCache</a> has been removed from Web Standards. It may be deprecated, it's the only <a href=\"http://caniuse.com/#search=appcache\" title=\"AppCache browser support\">cross-browser</a> <i>\"API\"</i> that let's you provide offline browsing to your websites ...</p>\n  <p>I automated the generation of the <a href=\"./manifest.appcache\" class=\"show-manifest-appcache\" title=\"Show manifest.appcache\"><code>manifest.appcache</code> <span class=\"glyphicon glyphicon-arrow-down\" aria-hidden=\"true\"></span></a> and integrated it in my webpack workflow (both at build &amp; development time).</p>\n  <pre style=\"display: none;\" id=\"placeholder-manifest-appcache\">\n    CLICK to show the manifest.appcache file\n  </pre>\n  <p class=\"lead\">Checkout the app in offline mode!</p>\n</div>\n";
+	module.exports = "<div class=\"container page-progressive-offline\">\n  <ol class=\"breadcrumb\" style=\"margin-top: 20px;\">\n    <li><a href=\"#/progressive\">Progressive</a></li>\n    <li class=\"active\">Offline</li>\n  </ol>\n  <h3>AppCache</h3>\n  <p><a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache\" title=\"AppCache on MDN\">AppCache</a> has been removed from Web Standards. It may be deprecated, it's the only <a href=\"http://caniuse.com/#search=appcache\" title=\"AppCache browser support\">cross-browser</a> <i>\"API\"</i> that let's you provide offline browsing to your websites ...</p>\n  <p>I automated the generation of the <a href=\"./manifest.appcache\" class=\"show-manifest-appcache\" title=\"Show manifest.appcache\"><code>manifest.appcache</code> <span class=\"glyphicon glyphicon-arrow-down\" aria-hidden=\"true\"></span></a> and integrated it in my webpack workflow (both at build &amp; development time).</p>\n  <p class=\"lead\">Checkout the app in offline mode! / <a href=\"http://dev.topheman.com/automate-appcache-offline-support-in-your-webpack-build/\" title=\"Automate AppCache offline support in your Webpack build\">Read the blog post about AppCache support automation</a></p>\n  <pre style=\"display: none;\" id=\"placeholder-manifest-appcache\">\n    CLICK to show the manifest.appcache file\n  </pre>\n</div>\n";
 
 /***/ },
 /* 398 */
@@ -23593,4 +23593,4 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=bundle-devtools-cbd193504b224ca9e605.js.map
+//# sourceMappingURL=bundle-devtools-198bdfd25baffa21a728.js.map
