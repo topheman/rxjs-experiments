@@ -12,7 +12,7 @@ import { show as showModal } from '../../components/modal/modal';
 import { mouseColor, accelerometerColor, windowResize } from '../../services/observables';
 
 const mount = () => {
-  const html = require('./template.html');
+  const html = require('./template.html');// eslint-disable-line global-require
 
   // prepare display
   const container = document.getElementById('app-container');
@@ -61,11 +61,7 @@ const mount = () => {
     hideModal(true);// remove the modal (whatever its state) when leaving
     enableMouseScroll();// reenable mouse scroll for other routes
     // unsubscribe from the observable
-    for (const sub in subscriptions) {
-      if (subscriptions.hasOwnProperty(sub)) {
-        subscriptions[sub].unsubscribe();// .dispose is now .unsubscribe https://github.com/ReactiveX/RxJS/blob/master/MIGRATION.md#subscription-dispose-is-now-unsubscribe
-      }
-    }
+    Object.keys(subscriptions).forEach(key => subscriptions[key].unsubscribe());// .dispose is now .unsubscribe https://github.com/ReactiveX/RxJS/blob/master/MIGRATION.md#subscription-dispose-is-now-unsubscribe
     container.style.background = 'transparent';
   };
   return unMount;

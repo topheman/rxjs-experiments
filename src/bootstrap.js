@@ -1,13 +1,14 @@
 /* eslint-disable max-len */
 
-// polyfills
-require('es6-promise').polyfill();
-require('fetch-polyfill');
-
 import './scripts/libs/requestAnimationFrame.polyfill';
 import modal, { show as showModal } from './scripts/components/modal/modal';
 import { router, hashHistory } from './scripts/libs/micro-router';
 import routes from './routes';
+
+// polyfills
+require('es6-promise').polyfill();
+require('fetch-polyfill');
+
 /** This is how you use the environments variables passed by the webpack.DefinePlugin **/
 
 /**
@@ -22,10 +23,8 @@ if (process.env.NODE_ENV !== 'production') {
     console.info('Linter active, if you meet some problems, you can still run without linter, just set the env var LINTER=false.');
   }
 }
-else {
-  if (process.env.DEVTOOLS) {
-    console.info('Turn on the "Sources" tab of your devtools to inspect original source code - thanks to sourcemaps!');
-  }
+else if (process.env.DEVTOOLS) {
+  console.info('Turn on the "Sources" tab of your devtools to inspect original source code - thanks to sourcemaps!');
 }
 
 /**

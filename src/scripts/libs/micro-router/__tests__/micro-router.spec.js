@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-expressions */
-const expect = require('chai').expect;
 
 import { compilePattern, normalizeRoutes, compileMatchMount } from '../utils';
+
+const expect = require('chai').expect;
 
 describe('micro-router', () => {
   describe('compilePattern', () => {

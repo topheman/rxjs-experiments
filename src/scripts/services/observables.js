@@ -28,8 +28,8 @@ export const mouseColor = (windowSize) => {
 };
 
 export const accelerometerColor = () => Observable.fromEvent(window, 'deviceorientation')
-    .map(e => ({ rRatio: e.alpha / 360, gRatio: (e.beta + 180) / 360, bRatio: (e.gamma + 90) / 180 }))
-    .map(ratioToRgbAccelerometer);
+  .map(e => ({ rRatio: e.alpha / 360, gRatio: (e.beta + 180) / 360, bRatio: (e.gamma + 90) / 180 }))
+  .map(ratioToRgbAccelerometer);
 
 export const mouseDrag = (elem, windowSize) => {
   const mouseDown = Observable.fromEvent(elem, 'mousedown');
@@ -45,7 +45,7 @@ export const mouseDrag = (elem, windowSize) => {
       startTime,
       color: ratioToRgbMouse(pointToRatio({ x: mm.clientX, y: mm.clientY }))
     }))
-    .takeUntil(mouseUp);
+      .takeUntil(mouseUp);
   });
 
   return {
@@ -64,7 +64,7 @@ export const touchDrag = (elem, windowSize) => {
 
   const move = touchStart.flatMap((e) => {
     // for each new touch, store the time it was created linking to its identifier in startTime
-    Array.from(e.changedTouches).forEach(touch => startTime[touch.identifier] = (new Date()).getTime());
+    Array.from(e.changedTouches).forEach(touch => startTime[touch.identifier] = (new Date()).getTime());// eslint-disable-line no-return-assign
     return touchMove.map(tm => {
       const touches = Array.from(tm.touches).map(touch => ({
         x: touch.clientX,

@@ -6,7 +6,7 @@
  * @returns {unMount}
  */
 const mount = () => {
-  const html = require('./template.html');
+  const html = require('./template.html');// eslint-disable-line global-require
 
   // prepare display
   document.getElementById('other-content').innerHTML = html;

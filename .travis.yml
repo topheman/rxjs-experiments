@@ -1,12 +1,6 @@
 language: node_js
 node_js:
   - "6"
-before_install:
-  - npm update -g
-  - npm --version
-  - time npm i -g yarn --cache-min 999999999
-install:
-  - time yarn
 before_script:
   - npm run build
   - npm run build-prod-all

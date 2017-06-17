@@ -17,11 +17,10 @@
  * ```
  */
 
-import { createHashHistory } from 'history';
-export const hashHistory = createHashHistory;
 import invariant from 'invariant';
-
 import { normalizeRoutes, compileMatchMount } from './utils';
+
+export { createHashHistory as hashHistory } from 'history';
 
 /*
  * @param {Function} createHistory

@@ -64,7 +64,7 @@ export const compilePattern = (pattern) => {
   }
 
   // 4) if nothing of the above applied, simply return a matcher that matched a string
-  return (pathname) => pathname === pattern ? {} : false;
+  return (pathname) => (pathname === pattern ? {} : false);
 };
 
 /**
@@ -91,12 +91,12 @@ export const normalizeRoutes = (routes) => routes.map(route => {
  * Returns a function that will match a pathname (from location.pathname) to a mount (a route with handler infos)
  * @param routes
  */
-export const compileMatchMount = (routes) => (pathname) => {// eslint-disable-line arrow-body-style
+export const compileMatchMount = (routes) => (pathname) => { // eslint-disable-line arrow-body-style
   // match the location.pathname to one of the routes and extract the related mounting infos (handler, resolve ...)
   return routes
     .reduce((result, route) => {
       const params = route.matcher(pathname);// a matcher returns false if no match or an object with potentials params matched for the route
-      if (params && result.length === 0) {// once we get a match, no more matching
+      if (params && result.length === 0) { // once we get a match, no more matching
         result.push({
           handler: route.handler,
           resolve: route.resolve,
