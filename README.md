@@ -44,14 +44,14 @@ Resources:
 
 ##Dev Workflow
 
-Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter).
+Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter) (the v2 using **webpack 2**).
 
 ###Install
 
 ```shell
 git clone https://github.com/topheman/rxjs-experiments.git
 cd rxjs-experiments
-npm install
+yarn
 ```
 
 ###Run
