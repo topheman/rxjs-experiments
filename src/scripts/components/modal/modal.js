@@ -46,8 +46,8 @@ const hide = (force = false) => {
   bootstrapModal.classList.remove('in');
   bootstrapModalBackdrop.classList.remove('in');
   if (force === false) {
-    setTimeout(() => bootstrapModal.style.display = 'none', MODAL_TRANSITION_DURATION);
-    setTimeout(() => bootstrapModalBackdrop.style.display = 'none', MODAL_BACKDROP_TRANSITION_DURATION);
+    setTimeout(() => bootstrapModal.style.display = 'none', MODAL_TRANSITION_DURATION); // eslint-disable-line no-return-assign
+    setTimeout(() => bootstrapModalBackdrop.style.display = 'none', MODAL_BACKDROP_TRANSITION_DURATION); // eslint-disable-line no-return-assign
   }
   else {
     bootstrapModal.style.display = 'none';

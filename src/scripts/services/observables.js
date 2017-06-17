@@ -64,7 +64,7 @@ export const touchDrag = (elem, windowSize) => {
 
   const move = touchStart.flatMap((e) => {
     // for each new touch, store the time it was created linking to its identifier in startTime
-    Array.from(e.changedTouches).forEach(touch => startTime[touch.identifier] = (new Date()).getTime());
+    Array.from(e.changedTouches).forEach(touch => startTime[touch.identifier] = (new Date()).getTime());// eslint-disable-line no-return-assign
     return touchMove.map(tm => {
       const touches = Array.from(tm.touches).map(touch => ({
         x: touch.clientX,

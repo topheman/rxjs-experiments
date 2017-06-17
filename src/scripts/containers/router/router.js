@@ -7,7 +7,7 @@
  */
 const mount = ({ location, params, history }) => {
   console.log('mount router', location, params, history);
-  const html = require('./template.html');
+  const html = require('./template.html');// eslint-disable-line global-require
   document.getElementById('other-content').innerHTML = html;
 
   document.getElementById('matched-route').innerHTML = location.pathname;

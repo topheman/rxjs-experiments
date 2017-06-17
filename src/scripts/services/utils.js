@@ -28,7 +28,8 @@ export const disableMouseScroll = () => {
   const originalDocumentOnKeyDown = document.onkeydown;
   const originalDocumentOnMouseWheel = document.onmousewheel;
   window.onwheel = preventDefault; // modern standard
-  window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+  // older browsers, IE
+  window.onmousewheel = document.onmousewheel = preventDefault; // eslint-disable-line no-multi-assign
   window.ontouchmove = preventDefault; // mobile
   document.onkeydown = preventDefaultForScrollKeys;
   return () => {
