@@ -13,7 +13,7 @@ New features comming, "progressive app" related - roadmap:
 
 All of those being integrated inside the webpack workflow (both at dev & build time). Check the [WIKI](https://github.com/topheman/rxjs-experiments/wiki) for more infos about how I managed this part of the app.
 
-##Introduction
+## Introduction
 
 The motivation of this project is to try out [RxJS](https://github.com/ReactiveX/rxjs), without relying on any framework (CycleJS, ReactJS or AngularJS 2), not to experience the library in a specific context.
 
@@ -28,7 +28,7 @@ Works on both desktop/mobile, but you'll enjoy it more on your tablet/phone (wit
 
 [![image](https://raw.githubusercontent.com/topheman/rxjs-experiments/master/src/assets/images/qr-code.png)](https://topheman.github.io/rxjs-experiments/)
 
-#####[Run the Demo](https://topheman.github.io/rxjs-experiments/) / [Check out the sources of the Observables](https://github.com/topheman/rxjs-experiments/blob/master/src/scripts/services/observables.js)
+##### [Run the Demo](https://topheman.github.io/rxjs-experiments/) / [Check out the sources of the Observables](https://github.com/topheman/rxjs-experiments/blob/master/src/scripts/services/observables.js)
 
 For the purpose fo this project, I developed the following:
 
@@ -42,11 +42,11 @@ Resources:
 * Checkout [topheman/angular2-sandbox](https://github.com/topheman/angular2-sandbox), a mix of Angular2, **RxJS** and **ngrx/store**
 * It uses the [CommonJS version of RxJS 5 (beta)](https://github.com/ReactiveX/rxjs#commonjs-via-npm)
 
-##Dev Workflow
+## Dev Workflow
 
 Based on the boilerplate [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter) (the v2 using **webpack 2**).
 
-###Install
+### Install
 
 ```shell
 git clone https://github.com/topheman/rxjs-experiments.git
@@ -54,7 +54,7 @@ cd rxjs-experiments
 yarn
 ```
 
-###Run
+### Run
 
 ```shell
 npm start
@@ -72,7 +72,7 @@ SENSORS_CHECKER=false npm start
 
 You can mix and match with `LOCALHOST=false` like: `LOCALHOST=false SENSORS_CHECKER=false npm start`
 
-###Build
+### Build
 
 The `./build` directory is ignored by git, it will contain a `dist` directory which holds the distribution version of your website (the one that you will [ship once built](#deploy)).
 
@@ -86,13 +86,13 @@ All the build tasks will create a built version of the project in the `./build/d
 
 `npm run serve-dist` will serve your `./build/dist` folder at [http://localhost:3000](http://localhost:3000) so that you could test the built version you just made.
 
-###Linter
+### Linter
 
 * eslint is running while you're developping, check your console for errors
 * you can also launch it via `npm run lint`
 * see `.eslintrc` for the configuration (currently, this project uses [the airbnb presets](https://github.com/airbnb/javascript/tree/eslint-config-airbnb-v5.0.1/packages/eslint-config-airbnb) - if you find it to restrictive, just remove `"extends": "airbnb/base"` in the `.eslintrc`)
 
-###Customizations
+### Customizations
 
 You can customize the behavior of the scripts by specifying environments vars:
 
@@ -104,7 +104,7 @@ You can customize the behavior of the scripts by specifying environments vars:
 * `DEVTOOLS`: By default at `null`. Used internally in `npm run build-prod-all` (you may not need that if you don't do OSS)
 * `APPCACHE`: You can use `APPCACHE=false` with a build task to generate an `appcache.manifest` that wont contain anything to cache (usefull if you want to reset cache on testing devices)
 
-###FAQ / Deploy
+### FAQ / Deploy
 
 See the [topheman/webpack-babel-starter](https://github.com/topheman/webpack-babel-starter)'s FAQ:
 
