@@ -17,7 +17,7 @@ const generateHandler = (name, handler) => ({ location, params, history }) => {
   };
 };
 
-const generatePromiseTimeout = (name, timeout = 5000) => new Promise(res => {// eslint-disable-line arrow-body-style
+const generatePromiseTimeout = (name, timeout = 5000) => new Promise(res => { // eslint-disable-line arrow-body-style
   return setTimeout(() => {
     console.log(`resolving ${name}, ${timeout}`);
     return res(`resolving ${name}`);

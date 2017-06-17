@@ -23,10 +23,8 @@ if (process.env.NODE_ENV !== 'production') {
     console.info('Linter active, if you meet some problems, you can still run without linter, just set the env var LINTER=false.');
   }
 }
-else {
-  if (process.env.DEVTOOLS) {
-    console.info('Turn on the "Sources" tab of your devtools to inspect original source code - thanks to sourcemaps!');
-  }
+else if (process.env.DEVTOOLS) {
+  console.info('Turn on the "Sources" tab of your devtools to inspect original source code - thanks to sourcemaps!');
 }
 
 /**
