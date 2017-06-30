@@ -3,8 +3,8 @@
  * 
  * Playing with RxJS
  * 
- * @version v1.0.0 - 2017-07-01T00:33:27+02:00
- * @revision #5c17c2b - https://github.com/topheman/rxjs-experiments/tree/5c17c2ba4ec0119a7a0fd250e11de5f31521948f
+ * @version v1.1.0 - 2017-07-01T01:04:37+02:00
+ * @revision #76971a0 - https://github.com/topheman/rxjs-experiments/tree/76971a0e26e1fd406b7a14b518ced088f3f3bb71
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @copyright 2017(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT
@@ -6839,7 +6839,7 @@ var debugs = {};
 var debugEnviron;
 exports.debuglog = function(set) {
   if (isUndefined(debugEnviron))
-    debugEnviron = __webpack_require__.i({"NODE_ENV":"production","DEVTOOLS":true,"LINTER":true,"SENSORS_CHECKER":true,"MODE_DEV_SERVER":false,"STRICT":true,"SW_VERSION":"v1.0.0-5c17c2b"}).NODE_DEBUG || '';
+    debugEnviron = __webpack_require__.i({"NODE_ENV":"production","DEVTOOLS":true,"LINTER":true,"SENSORS_CHECKER":true,"MODE_DEV_SERVER":false,"STRICT":true,"SW_VERSION":"v1.1.0-76971a0"}).NODE_DEBUG || '';
   set = set.toUpperCase();
   if (!debugs[set]) {
     if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -24255,4 +24255,4 @@ module.exports = function isBuffer(arg) {
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=bundle-devtools-3a450f5aee0b921cf4a0.js.map
+//# sourceMappingURL=bundle-devtools-c1374d4f8630662ce670.js.map
