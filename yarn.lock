@@ -2933,9 +2933,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lite-router@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/lite-router/-/lite-router-0.0.1.tgz#53551f10f353fc3dd4c035fa5d51fff8d30d738a"
+lite-router@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/lite-router/-/lite-router-1.0.0.tgz#4808124d5a75a615b03a11e0936e8d1efd2df97b"
   dependencies:
     history "^2.0.1"
     invariant "^2.2.2"

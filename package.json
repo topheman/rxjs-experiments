@@ -80,7 +80,7 @@
     "bootstrap-sass": "^3.3.6",
     "es6-promise": "^3.2.1",
     "fetch-polyfill": "^0.8.2",
-    "lite-router": "^0.0.1",
+    "lite-router": "^1.0.0",
     "rxjs": "^5.0.0-rc.1",
     "sensors-checker": "^1.0.0"
   }
