@@ -32,7 +32,7 @@ Works on both desktop/mobile, but you'll enjoy it more on your tablet/phone (wit
 
 For the purpose fo this project, I developed the following:
 
-* A [micro-router](https://github.com/topheman/rxjs-experiments/tree/master/src/scripts/libs/micro-router) (based on [history](https://github.com/mjackson/history))
+* [lite-router](https://github.com/topheman/lite-router), a micro-router (based on [history](https://github.com/mjackson/history))
 * A VanillaJS implementation of the [bootstrap modal](https://github.com/topheman/rxjs-experiments/tree/master/src/scripts/components/modal)
 * It also uses [sensors-checker](https://github.com/topheman/sensorsChecker.js) to detect accelerometers on devices
 
