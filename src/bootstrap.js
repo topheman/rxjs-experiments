@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
 
+import router from 'lite-router'; // eslint-disable-line import/no-extraneous-dependencies
+
 import './scripts/libs/requestAnimationFrame.polyfill';
 import modal, { show as showModal } from './scripts/components/modal/modal';
-import { router, hashHistory } from './scripts/libs/micro-router';
 import routes from './routes';
 
 // polyfills
@@ -74,4 +75,4 @@ const main = () => {
 };
 
 main();
-router(hashHistory, routes);
+router(routes);
