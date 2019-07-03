@@ -14,8 +14,6 @@ export const resolveDeviceOrientation = () => new Promise((res) => {
   }, () => {
     deviceOrientationActive = false;
     return res(deviceOrientationActive);
-  }, {
-    userAgentCheck: /(iPad|iPhone|Nexus|Mobile|Tablet)/i// @optional (to bypass the sniffing)
   });
 });
 
