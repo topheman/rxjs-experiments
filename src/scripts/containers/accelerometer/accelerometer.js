@@ -11,6 +11,27 @@ import { isDeviceOrientationActive } from '../../services/accelerometer';
 import { show as showModal } from '../../components/modal/modal';
 import { mouseColor, accelerometerColor, windowResize } from '../../services/observables';
 
+function modalMessage(deviceOrientationActive, isMobile) {
+  const infos = [];
+  if (deviceOrientationActive) {
+    infos.push('<strong>An accelerometer has been detected on your device</strong>, the demo will be based on it.');
+  }
+  else {
+    infos.push('<strong>No accelerometer</strong> was detected on your device.');
+    if (isMobile) {
+      infos.push(`Please activate <strong>"Motion and Orientation"</strong> feature in\nSettings > Safari or Settings > Chrome`);
+    }
+    else {
+      infos.push('The demo will be based on <strong>mouse mouvements</strong>');
+      infos.push('Try it on your mobile to test it with accelerometer support!');
+    }
+  }
+  if (!isMobile) {
+    infos.push(`<strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.`);
+  }
+  return `<p>${infos.join('</p><p>')}</p>`;
+}
+
 const mount = () => {
   const html = require('./template.html');// eslint-disable-line global-require
 
@@ -19,10 +40,10 @@ const mount = () => {
   container.innerHTML = html;
   container.classList.add('full-screen');
   const deviceOrientationActive = isDeviceOrientationActive();
+  const isMobile = /(iPad|iPhone|Nexus|Mobile|Tablet)/i.test(navigator.userAgent);
   const hideModal = showModal({
     title: 'Accelerometer',
-    content: `<p>${deviceOrientationActive ? '<strong>An accelerometer has been detected on your device</strong>, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.<br><br>Try it on your mobile to test it with accelerometer support!'}</p>
-              <p class="lead"><strong>Move your ${deviceOrientationActive ? 'phone' : 'mouse'}</strong> to change the background color.</p>`
+    content: modalMessage(deviceOrientationActive, isMobile)
   });
   const enableMouseScroll = disableMouseScroll();
   const debug = document.getElementById('accelerometer-debug');
