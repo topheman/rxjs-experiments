@@ -3,10 +3,10 @@
  * 
  * Playing with RxJS
  * 
- * @version v1.1.0 - 2017-07-01T01:04:37+02:00
- * @revision #76971a0 - https://github.com/topheman/rxjs-experiments/tree/76971a0e26e1fd406b7a14b518ced088f3f3bb71
+ * @version v1.1.1 - 2019-07-03T19:38:01+02:00
+ * @revision #80a30b6 - https://github.com/topheman/rxjs-experiments/tree/80a30b6c22a34a58945dd6f3ebf678d7535b7fb9
  * @author Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
- * @copyright 2017(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
+ * @copyright 2019(c) Christophe Rosset <tophe@topheman.com> (http://labs.topheman.com/)
  * @license MIT
  * 
  */
@@ -2500,8 +2500,6 @@ var resolveDeviceOrientation = exports.resolveDeviceOrientation = function resol
     }, function () {
       deviceOrientationActive = false;
       return res(deviceOrientationActive);
-    }, {
-      userAgentCheck: /(iPad|iPhone|Nexus|Mobile|Tablet)/i // @optional (to bypass the sniffing)
     });
   });
 };
@@ -6839,7 +6837,7 @@ var debugs = {};
 var debugEnviron;
 exports.debuglog = function(set) {
   if (isUndefined(debugEnviron))
-    debugEnviron = __webpack_require__.i({"NODE_ENV":"production","DEVTOOLS":true,"LINTER":true,"SENSORS_CHECKER":true,"MODE_DEV_SERVER":false,"STRICT":true,"SW_VERSION":"v1.1.0-76971a0"}).NODE_DEBUG || '';
+    debugEnviron = __webpack_require__.i({"NODE_ENV":"production","DEVTOOLS":true,"LINTER":true,"SENSORS_CHECKER":true,"MODE_DEV_SERVER":false,"STRICT":true,"SW_VERSION":"v1.1.1-80a30b6"}).NODE_DEBUG || '';
   set = set.toUpperCase();
   if (!debugs[set]) {
     if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -9671,6 +9669,25 @@ var _observables = __webpack_require__(50);
  * @returns {unMount}
  */
 
+function modalMessage(deviceOrientationActive, isMobile) {
+  var infos = [];
+  if (deviceOrientationActive) {
+    infos.push('<strong>An accelerometer has been detected on your device</strong>, the demo will be based on it.');
+  } else {
+    infos.push('<strong>No accelerometer</strong> was detected on your device.');
+    if (isMobile) {
+      infos.push('Please activate <strong>"Motion and Orientation"</strong> feature in\nSettings > Safari or Settings > Chrome');
+    } else {
+      infos.push('The demo will be based on <strong>mouse mouvements</strong>');
+      infos.push('Try it on your mobile to test it with accelerometer support!');
+    }
+  }
+  if (!isMobile) {
+    infos.push('<strong>Move your ' + (deviceOrientationActive ? 'phone' : 'mouse') + '</strong> to change the background color.');
+  }
+  return '<p>' + infos.join('</p><p>') + '</p>';
+}
+
 var mount = function mount() {
   var html = __webpack_require__(114); // eslint-disable-line global-require
 
@@ -9679,9 +9696,10 @@ var mount = function mount() {
   container.innerHTML = html;
   container.classList.add('full-screen');
   var deviceOrientationActive = (0, _accelerometer.isDeviceOrientationActive)();
+  var isMobile = /(iPad|iPhone|Nexus|Mobile|Tablet)/i.test(navigator.userAgent);
   var hideModal = (0, _modal.show)({
     title: 'Accelerometer',
-    content: '<p>' + (deviceOrientationActive ? '<strong>An accelerometer has been detected on your device</strong>, the demo will be based on it.' : '<strong>No accelerometer</strong> was detected on your device, the demo will be based on <strong>mouse mouvements</strong>.<br><br>Try it on your mobile to test it with accelerometer support!') + '</p>\n              <p class="lead"><strong>Move your ' + (deviceOrientationActive ? 'phone' : 'mouse') + '</strong> to change the background color.</p>'
+    content: modalMessage(deviceOrientationActive, isMobile)
   });
   var enableMouseScroll = (0, _utils.disableMouseScroll)();
   var debug = document.getElementById('accelerometer-debug');
@@ -24255,4 +24273,4 @@ module.exports = function isBuffer(arg) {
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=bundle-devtools-c1374d4f8630662ce670.js.map
+//# sourceMappingURL=bundle-devtools-f9e7826a2263028b49cf.js.map
