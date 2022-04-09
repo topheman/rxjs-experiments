@@ -62,7 +62,7 @@
     "html-webpack-plugin": "^2.9.0",
     "json-loader": "^0.5.4",
     "lodash.template": "^4.2.2",
-    "moment": "^2.11.2",
+    "moment": "^2.29.2",
     "my-local-ip": "^1.0.0",
     "node-sass": "^4.12.0",
     "npmlog": "^2.0.2",
